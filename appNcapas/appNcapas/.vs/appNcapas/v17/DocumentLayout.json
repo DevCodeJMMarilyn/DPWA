@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\univo\\Desktop\\appNcapas\\appNcapas\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3C892B3B-7F93-4AE9-8457-219DC8D5FF27}|ProyectoReservas\\CapaPresentacion.csproj|C:\\Users\\univo\\Desktop\\appNcapas\\appNcapas\\proyectoreservas\\default.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{3C892B3B-7F93-4AE9-8457-219DC8D5FF27}|ProyectoReservas\\CapaPresentacion.csproj|solutionrelative:proyectoreservas\\default.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C892B3B-7F93-4AE9-8457-219DC8D5FF27}|ProyectoReservas\\CapaPresentacion.csproj|c:\\users\\univo\\desktop\\appncapas\\appncapas\\proyectoreservas\\default.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C892B3B-7F93-4AE9-8457-219DC8D5FF27}|ProyectoReservas\\CapaPresentacion.csproj|solutionrelative:proyectoreservas\\default.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C892B3B-7F93-4AE9-8457-219DC8D5FF27}|ProyectoReservas\\CapaPresentacion.csproj|c:\\users\\univo\\desktop\\appncapas\\appncapas\\proyectoreservas\\default.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C892B3B-7F93-4AE9-8457-219DC8D5FF27}|ProyectoReservas\\CapaPresentacion.csproj|solutionrelative:proyectoreservas\\default.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Default.aspx.designer.cs",
+              "DocumentMoniker": "C:\\Users\\univo\\Desktop\\appNcapas\\appNcapas\\ProyectoReservas\\Default.aspx.designer.cs",
+              "RelativeDocumentMoniker": "ProyectoReservas\\Default.aspx.designer.cs",
+              "ToolTip": "C:\\Users\\univo\\Desktop\\appNcapas\\appNcapas\\ProyectoReservas\\Default.aspx.designer.cs",
+              "RelativeToolTip": "ProyectoReservas\\Default.aspx.designer.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAQwEQAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T17:50:44.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Default.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\univo\\Desktop\\appNcapas\\appNcapas\\ProyectoReservas\\Default.aspx.cs",
+              "RelativeDocumentMoniker": "ProyectoReservas\\Default.aspx.cs",
+              "ToolTip": "C:\\Users\\univo\\Desktop\\appNcapas\\appNcapas\\ProyectoReservas\\Default.aspx.cs",
+              "RelativeToolTip": "ProyectoReservas\\Default.aspx.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T17:42:18.714Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Default.aspx",
+              "DocumentMoniker": "C:\\Users\\univo\\Desktop\\appNcapas\\appNcapas\\ProyectoReservas\\Default.aspx",
+              "RelativeDocumentMoniker": "ProyectoReservas\\Default.aspx",
+              "ToolTip": "C:\\Users\\univo\\Desktop\\appNcapas\\appNcapas\\ProyectoReservas\\Default.aspx",
+              "RelativeToolTip": "ProyectoReservas\\Default.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-01-22T17:36:12.723Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
