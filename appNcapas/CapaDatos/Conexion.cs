@@ -10,7 +10,7 @@ namespace CapaDatos
     public class Conexion
     {
         private static string cadena =
-            "Data Source=DEVELOPER;Initial Catalog=LoginDB;Integrated Security=True";
+            "Data Source=DESKTOP-P4EDB64;Initial Catalog=LoginDB;Integrated Security=True";
 
         public static SqlConnection obtenerConexion()
         {

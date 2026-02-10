@@ -23,5 +23,20 @@ namespace CapaPresentacion
             dgvHabitaciones.DataSource = _habitaciones.ObtenerhabitacionesN();
             dgvHabitaciones.DataBind();
         }
+
+        protected void btnguardar_Click(object sender, EventArgs e)
+        {
+            int numero = Convert.ToInt32(txtnumero.Text);
+            string descripcion = txtdescripcion.Text;
+            int cant = Convert.ToInt32(txtcant.Text);
+
+            bool correcto = _habitaciones.agregar_habitaciones(numero, descripcion, cant);
+            if (correcto){
+                Response.Write("<script>alert('Habitacion agregada');</script>");
+                CargarGrid();
+            }else{
+                Response.Write("<script>alert('Error al insertar ');</script>");
+            }
+        }
     }
 }

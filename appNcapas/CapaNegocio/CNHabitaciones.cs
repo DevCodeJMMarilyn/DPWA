@@ -16,5 +16,11 @@ namespace CapaNegocio
         {
             return _habitaciones.ObtenerHabitaciones();
         }
+    
+
+    public bool agregar_habitaciones(int numero, string descripcion, int cantidad)
+    {
+        return _habitaciones.AgregarHabitacion(numero, descripcion, cantidad);
+    }
     }
 }
