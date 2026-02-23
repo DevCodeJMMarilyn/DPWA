@@ -1,0 +1,187 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appweb2\\appweb2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appweb2\\appweb2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appweb2\\appweb2\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appweb2\\appweb2\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appweb2\\appweb2\\models\\compra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\models\\compra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appweb2\\appweb2\\models\\videojuegos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\models\\videojuegos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appweb2\\appweb2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appweb2\\appweb2\\migrations\\20260217181507_inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\migrations\\20260217181507_inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appweb2\\appweb2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appweb2\\appweb2\\views\\home\\contacts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\views\\home\\contacts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "appWeb2\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "appWeb2\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T17:43:46.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Program.cs",
+              "RelativeDocumentMoniker": "appWeb2\\Program.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Program.cs",
+              "RelativeToolTip": "appWeb2\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T18:04:49.906Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\appsettings.json",
+              "RelativeDocumentMoniker": "appWeb2\\appsettings.json",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\appsettings.json",
+              "RelativeToolTip": "appWeb2\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-17T17:52:15.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Models\\Usuario.cs",
+              "RelativeDocumentMoniker": "appWeb2\\Models\\Usuario.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Models\\Usuario.cs",
+              "RelativeToolTip": "appWeb2\\Models\\Usuario.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAUAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T17:11:42.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Compra.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Models\\Compra.cs",
+              "RelativeDocumentMoniker": "appWeb2\\Models\\Compra.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Models\\Compra.cs",
+              "RelativeToolTip": "appWeb2\\Models\\Compra.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T17:10:21.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "VideoJuegos.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Models\\VideoJuegos.cs",
+              "RelativeDocumentMoniker": "appWeb2\\Models\\VideoJuegos.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Models\\VideoJuegos.cs",
+              "RelativeToolTip": "appWeb2\\Models\\VideoJuegos.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAQwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T17:14:14.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "appWeb2\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "appWeb2\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwA8AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-12T17:55:36.527Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "20260217181507_Inicial.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Migrations\\20260217181507_Inicial.cs",
+              "RelativeDocumentMoniker": "appWeb2\\Migrations\\20260217181507_Inicial.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Migrations\\20260217181507_Inicial.cs",
+              "RelativeToolTip": "appWeb2\\Migrations\\20260217181507_Inicial.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T18:15:07.982Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Contacts.cshtml",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Views\\Home\\Contacts.cshtml",
+              "RelativeDocumentMoniker": "appWeb2\\Views\\Home\\Contacts.cshtml",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Views\\Home\\Contacts.cshtml",
+              "RelativeToolTip": "appWeb2\\Views\\Home\\Contacts.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-12T17:56:26.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "appWeb2\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appWeb2\\appWeb2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "appWeb2\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-12T17:51:54.581Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

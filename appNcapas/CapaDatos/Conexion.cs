@@ -11,10 +11,10 @@ namespace CapaDatos
     {
         private static string cadena =
             "Data Source=DESKTOP-P4EDB64;Initial Catalog=LoginDB;Integrated Security=True";
-
         public static SqlConnection obtenerConexion()
         {
             return new SqlConnection(cadena);
         }
+
     }
 }

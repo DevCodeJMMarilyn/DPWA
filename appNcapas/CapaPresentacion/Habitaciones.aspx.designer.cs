@@ -42,13 +42,13 @@ namespace CapaPresentacion
         protected global::System.Web.UI.WebControls.TextBox txtnumero;
 
         /// <summary>
-        /// Control lbldescripcion.
+        /// Control lbdescripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbldescripcion;
+        protected global::System.Web.UI.WebControls.Label lbdescripcion;
 
         /// <summary>
         /// Control txtdescripcion.
@@ -60,13 +60,13 @@ namespace CapaPresentacion
         protected global::System.Web.UI.WebControls.TextBox txtdescripcion;
 
         /// <summary>
-        /// Control lblcant.
+        /// Control lbcant.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblcant;
+        protected global::System.Web.UI.WebControls.Label lbcant;
 
         /// <summary>
         /// Control txtcant.
