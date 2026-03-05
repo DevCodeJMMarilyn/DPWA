@@ -1,0 +1,46 @@
+﻿@model appMishiEnvios.Models.Envio
+
+<div class="container mt-4">
+
+    <div class="card shadow p-4">
+
+        <h2 class="text-warning mb-3">Editar Envío</h2>
+
+        <form asp-action="Edit" method="post">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label class="form-label">Destinatario</label>
+                <select asp-for="DestinatarioId"
+                        asp-items="ViewBag.DestinatarioId"
+                        class="form-control">
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Estado del envío</label>
+                <select asp-for="EstadoEnvioId"
+                        asp-items="ViewBag.EstadoEnvioId"
+                        class="form-control">
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Fecha</label>
+                <input asp-for="FechaEnvio" type="date" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-warning">
+                Actualizar
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                Volver
+            </a>
+
+        </form>
+
+    </div>
+
+</div>

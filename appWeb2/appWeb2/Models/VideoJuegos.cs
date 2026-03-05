@@ -24,7 +24,7 @@ namespace appWeb2.Models
         [StringLength(500)]
         public string descripcion { get; set; }
 
-        public ICollection<Compra> Compras { get; set; }
+        // public ICollection<Compra> Compras { get; set; }
 
     }
 }

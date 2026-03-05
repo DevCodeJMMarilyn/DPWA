@@ -1,14 +1,24 @@
 using System.Diagnostics;
+using appWeb2.Data;
 using appWeb2.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace appWeb2.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly AppDbContext _context;
+
+        public HomeController(AppDbContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        public async Task<IActionResult>Index()
+        {
+            var juegos = await _context.VideoJuegos.ToListAsync();
+            return View(juegos);
         }
 
         public IActionResult Privacy()
@@ -21,6 +31,13 @@ namespace appWeb2.Controllers
             return View();
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+
+        public IActionResult Calcular(Notas model)
+        {
+            model.promedio = (model.n1 + model.n2 + model.n3) / 3;
+            return View("Index", model);
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

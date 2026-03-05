@@ -1,0 +1,187 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appenvios\\appenvios\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|solutionrelative:appenvios\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appenvios\\appenvios\\models\\envio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|solutionrelative:appenvios\\models\\envio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appenvios\\appenvios\\models\\destinatario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|solutionrelative:appenvios\\models\\destinatario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appenvios\\appenvios\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|solutionrelative:appenvios\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appenvios\\appenvios\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|solutionrelative:appenvios\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appenvios\\appenvios\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|solutionrelative:appenvios\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appenvios\\appenvios\\models\\paquete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|solutionrelative:appenvios\\models\\paquete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appenvios\\appenvios\\models\\estadoenvio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|solutionrelative:appenvios\\models\\estadoenvio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appenvios\\appenvios\\migrations\\20260219180956_inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89C261A0-DDE9-15AB-B5C5-E79200752F57}|appEnvios\\appEnvios.csproj|solutionrelative:appenvios\\migrations\\20260219180956_inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Migrations\\20260219180650_Inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:appEnvios\\Migrations\\20260219180650_Inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "appEnvios\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "appEnvios\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-19T17:55:37.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Models\\Cliente.cs",
+              "RelativeDocumentMoniker": "appEnvios\\Models\\Cliente.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Models\\Cliente.cs",
+              "RelativeToolTip": "appEnvios\\Models\\Cliente.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwAYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-19T17:10:28.653Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Envio.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Models\\Envio.cs",
+              "RelativeDocumentMoniker": "appEnvios\\Models\\Envio.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Models\\Envio.cs",
+              "RelativeToolTip": "appEnvios\\Models\\Envio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-19T17:15:02.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Paquete.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Models\\Paquete.cs",
+              "RelativeDocumentMoniker": "appEnvios\\Models\\Paquete.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Models\\Paquete.cs",
+              "RelativeToolTip": "appEnvios\\Models\\Paquete.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-19T17:24:50.536Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Destinatario.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Models\\Destinatario.cs",
+              "RelativeDocumentMoniker": "appEnvios\\Models\\Destinatario.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Models\\Destinatario.cs",
+              "RelativeToolTip": "appEnvios\\Models\\Destinatario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-19T17:37:11.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EstadoEnvio.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Models\\EstadoEnvio.cs",
+              "RelativeDocumentMoniker": "appEnvios\\Models\\EstadoEnvio.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Models\\EstadoEnvio.cs",
+              "RelativeToolTip": "appEnvios\\Models\\EstadoEnvio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-19T17:20:41.202Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\appsettings.json",
+              "RelativeDocumentMoniker": "appEnvios\\appsettings.json",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\appsettings.json",
+              "RelativeToolTip": "appEnvios\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-19T17:58:46.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Program.cs",
+              "RelativeDocumentMoniker": "appEnvios\\Program.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Program.cs",
+              "RelativeToolTip": "appEnvios\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-19T17:57:45.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20260219180956_Inicial.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Migrations\\20260219180956_Inicial.cs",
+              "RelativeDocumentMoniker": "appEnvios\\Migrations\\20260219180956_Inicial.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Migrations\\20260219180956_Inicial.cs",
+              "RelativeToolTip": "appEnvios\\Migrations\\20260219180956_Inicial.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-19T18:09:56.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "20260219180650_Inicial.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Migrations\\20260219180650_Inicial.cs",
+              "RelativeDocumentMoniker": "appEnvios\\Migrations\\20260219180650_Inicial.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appEnvios\\appEnvios\\Migrations\\20260219180650_Inicial.cs",
+              "RelativeToolTip": "appEnvios\\Migrations\\20260219180650_Inicial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-19T18:06:50.342Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

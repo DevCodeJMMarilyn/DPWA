@@ -1,0 +1,23 @@
+﻿@model appWeb2.Models.VideoJuegos
+
+<h2>Eliminar Videojuego</h2>
+
+<h4>¿Estás seguro que deseas eliminar esto?</h4>
+
+<div>
+    <strong>@Model.titulo</strong> - $@Model.precio
+</div>
+
+<form asp-action="Delete">
+
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Eliminar
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>

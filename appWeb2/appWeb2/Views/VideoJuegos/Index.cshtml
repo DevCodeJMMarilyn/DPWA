@@ -1,0 +1,56 @@
+﻿@model IEnumerable<appWeb2.Models.VideoJuegos>
+
+<h2 class="mb-4">🎮 Videojuegos Disponibles</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-4">
+    + Nuevo Juego
+</a>
+
+<div class="row">
+
+    @foreach (var juego in Model)
+    {
+        <div class="col-md-4">
+            <div class="card shadow mb-4">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        @juego.titulo
+                    </h5>
+
+                    <p class="card-text">
+                        @juego.descripcion
+                    </p>
+
+                    <p>
+                        <strong>Categoría:</strong> @juego.categoria
+                    </p>
+
+                    <p>
+                        <strong>Precio:</strong> $@juego.precio
+                    </p>
+
+                    <div class="d-flex gap-2">
+
+                        <a asp-action="Edit"
+                           asp-route-id="@juego.Id"
+                           class="btn btn-warning btn-sm">
+                            Editar
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@juego.Id"
+                           class="btn btn-danger btn-sm">
+                            Eliminar
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    }
+
+</div>

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<appMishiEnvios.Models.Envio>
+
+<div class="mb-4">
+    <h2 class="text-primary"> CRUD - Gestión de Envíos</h2>
+    <p class="text-muted">Panel de administración del sistema SmallBox</p>
+</div>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo Envío</a>
+</p>
+
+<p>Total envíos: @Model.Count()</p>
+
+<table class="table table-striped table-hover shadow">
+
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Destinatario</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.Destinatario?.Cliente?.Nombre</td>
+
+                <td>@item.Destinatario?.Nombre</td>
+
+                <td>
+                    @if (item.EstadoEnvio?.Nombre == "Pendiente")
+                    {
+                        <span class="badge bg-danger text-dark">
+                            @item.EstadoEnvio.Nombre
+                        </span>
+                    }
+                    else if (item.EstadoEnvio?.Nombre == "En proceso")
+                    {
+                        <span class="badge bg-primary">
+                            @item.EstadoEnvio.Nombre
+                        </span>
+                    }
+                    else if (item.EstadoEnvio?.Nombre == "Entregado")
+                    {
+                        <span class="badge bg-success">
+                            @item.EstadoEnvio.Nombre
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-info">
+                            @item.EstadoEnvio?.Nombre
+                        </span>
+                    }
+                </td>
+
+                <td>@item.FechaEnvio.ToShortDateString()</td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">
+                        Editar ✏️
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
+                        Eliminar 🗑
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

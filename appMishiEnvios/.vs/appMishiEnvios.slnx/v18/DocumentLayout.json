@@ -1,0 +1,322 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\views\\envio\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\views\\envio\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\views\\envio\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\views\\envio\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\views\\envio\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\views\\envio\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\views\\envio\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\views\\envio\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\controllers\\enviocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\controllers\\enviocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\models\\estadoenvio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\models\\estadoenvio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\models\\envio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\models\\envio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\models\\destinatario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\models\\destinatario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\models\\auditoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\models\\auditoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Migrations\\20260304222128_Inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:appMishiEnvios\\Migrations\\20260304222128_Inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\migrations\\20260304235306_inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\migrations\\20260304235306_inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\appmishienvios\\appmishienvios\\appmishienvios.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{3D713F42-2970-971D-7E25-5F8779C01E17}|appMishiEnvios\\appMishiEnvios.csproj|solutionrelative:appmishienvios\\appmishienvios.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "appMishiEnvios\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-05T04:42:53.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "appMishiEnvios\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-05T04:41:12.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EstadoEnvio.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Models\\EstadoEnvio.cs",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Models\\EstadoEnvio.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Models\\EstadoEnvio.cs",
+              "RelativeToolTip": "appMishiEnvios\\Models\\EstadoEnvio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T23:15:35.04Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Envio.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Models\\Envio.cs",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Models\\Envio.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Models\\Envio.cs",
+              "RelativeToolTip": "appMishiEnvios\\Models\\Envio.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T20:24:51.743Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Program.cs",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Program.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Program.cs",
+              "RelativeToolTip": "appMishiEnvios\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-05T01:32:26.334Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Auditoria.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Models\\Auditoria.cs",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Models\\Auditoria.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Models\\Auditoria.cs",
+              "RelativeToolTip": "appMishiEnvios\\Models\\Auditoria.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T20:59:16.005Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Models\\Cliente.cs",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Models\\Cliente.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Models\\Cliente.cs",
+              "RelativeToolTip": "appMishiEnvios\\Models\\Cliente.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T23:14:04.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\Envio\\Index.cshtml",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Views\\Envio\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\Envio\\Index.cshtml",
+              "RelativeToolTip": "appMishiEnvios\\Views\\Envio\\Index.cshtml",
+              "ViewState": "AgIAACgAAAAAAAAAAAAAADIAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-05T01:16:56.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\Envio\\Create.cshtml",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Views\\Envio\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\Envio\\Create.cshtml",
+              "RelativeToolTip": "appMishiEnvios\\Views\\Envio\\Create.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABMAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-05T01:23:17.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\Envio\\Edit.cshtml",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Views\\Envio\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\Envio\\Edit.cshtml",
+              "RelativeToolTip": "appMishiEnvios\\Views\\Envio\\Edit.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-05T03:35:22.548Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\Envio\\Delete.cshtml",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Views\\Envio\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\Envio\\Delete.cshtml",
+              "RelativeToolTip": "appMishiEnvios\\Views\\Envio\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-05T01:24:55.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "EnvioController.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Controllers\\EnvioController.cs",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Controllers\\EnvioController.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Controllers\\EnvioController.cs",
+              "RelativeToolTip": "appMishiEnvios\\Controllers\\EnvioController.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAcwIEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-05T00:07:36.98Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "appMishiEnvios\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-05T03:57:35.79Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "20260304235306_Inicial.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Migrations\\20260304235306_Inicial.cs",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Migrations\\20260304235306_Inicial.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Migrations\\20260304235306_Inicial.cs",
+              "RelativeToolTip": "appMishiEnvios\\Migrations\\20260304235306_Inicial.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T23:53:06.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Destinatario.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Models\\Destinatario.cs",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Models\\Destinatario.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Models\\Destinatario.cs",
+              "RelativeToolTip": "appMishiEnvios\\Models\\Destinatario.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAYwBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T22:53:54.495Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "20260304222128_Inicial.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Migrations\\20260304222128_Inicial.cs",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Migrations\\20260304222128_Inicial.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Migrations\\20260304222128_Inicial.cs",
+              "RelativeToolTip": "appMishiEnvios\\Migrations\\20260304222128_Inicial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T22:21:28.67Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "appMishiEnvios\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "appMishiEnvios\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T21:45:04.099Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "appMishiEnvios.csproj",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj",
+              "RelativeDocumentMoniker": "appMishiEnvios\\appMishiEnvios.csproj",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj",
+              "RelativeToolTip": "appMishiEnvios\\appMishiEnvios.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-04T21:44:21.15Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

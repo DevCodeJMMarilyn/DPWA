@@ -1,8 +1,52 @@
-﻿@{
+﻿@model IEnumerable<appWeb2.Models.VideoJuegos>
+@{
     ViewData["Title"] = "Home Page";
+    Layout = "admin";
+
 }
 
-<div class="text-center">
+<br/>
+<h2>Videojuegos Disponibles</h2>
+
+<div class="row">
+    @foreach (var juego in Model)
+    {
+        <div class=" col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@juego.titulo</h5>
+                    <p class="card-text">@juego.descripcion</p>
+                    <p><strong>Categoria:</strong>@juego.categoria</p>
+                    <p>
+                        <strong>Precio:</strong>@juego.precio
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@*
+    @model Notas;
+    <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+@{
+    string nombre = "Michelle";
+}
+<h1>Hola @nombre</h1>
+*@
+
+
+@* 
+    <form asp-controller="Home" asp-action="Calcular" method="post">
+    <input type="number" asp-for="n1" placeholder="Número 1" /><br /> <br />
+    <input type="number" asp-for="n2" placeholder="Número 2" /><br /> <br />
+    <input type="number" asp-for="n3" placeholder="Número 3" /><br /> <br />
+    <br /><br />
+    <input type="submit" value="Calcular" />
+</form>
+
+<h1>El promedio es: @Model.promedio</h1>
+ *@
