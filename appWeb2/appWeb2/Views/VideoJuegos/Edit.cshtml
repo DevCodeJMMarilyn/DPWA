@@ -1,36 +1,86 @@
-﻿@model appWeb2.Models.VideoJuegos
+@model appWeb2.Models.VideoJuegos
 
-<h2>Editar Videojuego</h2>
+@{
+    ViewData["Title"] = "Editar Videojuego";
+}
 
-<form asp-action="Edit">
+<div class="container mt-4" style="max-width:600px;">
+    <h2 class="fw-bold text-warning mb-4">✏️ Editar Videojuego</h2>
 
-    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
-    <div>
-        <label>Titulo</label>
-        <input asp-for="titulo" class="form-control" />
-        <span asp-validation-for="titulo"></span>
-    </div>
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
 
-    <div>
-        <label>Precio</label>
-        <input asp-for="precio" class="form-control" />
-        <span asp-validation-for="precio"></span>
-    </div>
+        <input type="hidden" asp-for="Id" />
 
-    <div>
-        <label>Categoria</label>
-        <input asp-for="categoria" class="form-control" />
-        <span asp-validation-for="categoria"></span>
-    </div>
+        <div class="mb-3">
+            <label asp-for="titulo" class="form-label fw-bold">Título</label>
+            <input asp-for="titulo" class="form-control" />
+            <span asp-validation-for="titulo" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label>Descripcion</label>
-        <textarea asp-for="descripcion" class="form-control"></textarea>
-    </div>
+        <div class="mb-3">
+            <label asp-for="precio" class="form-label fw-bold">Precio ($)</label>
+            <input asp-for="precio" class="form-control" />
+            <span asp-validation-for="precio" class="text-danger"></span>
+        </div>
 
-    <button type="submit" class="btn btn-warning">
-        Actualizar
-    </button>
+        <div class="mb-3">
+            <label asp-for="categoria" class="form-label fw-bold">Categoría</label>
+            <select asp-for="categoria" class="form-select">
+                <option value="">-- Seleccione --</option>
+                <option>Acción</option>
+                <option>RPG</option>
+                <option>Fantasía</option>
+                <option>Apocalipsis</option>
+                <option>Deportes</option>
+                <option>Aventura</option>
+            </select>
+            <span asp-validation-for="categoria" class="text-danger"></span>
+        </div>
 
-</form>
+        <div class="mb-3">
+            <label asp-for="descripcion" class="form-label fw-bold">Descripción</label>
+            <textarea asp-for="descripcion" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="descripcion" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="edadMinima" class="form-label fw-bold">Edad mínima</label>
+            <input asp-for="edadMinima" class="form-control" type="number" min="0" max="99" />
+            <span asp-validation-for="edadMinima" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input asp-for="enPromocion" class="form-check-input" type="checkbox" />
+            <label asp-for="enPromocion" class="form-check-label fw-bold">¿En promoción?</label>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Imagen actual</label><br />
+            @if (!string.IsNullOrEmpty(Model.imagen))
+            {
+                <img src="@Model.imagen" width="160" class="rounded mb-2" alt="Imagen actual" />
+            }
+            else
+            {
+                <p class="text-muted">Sin imagen</p>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Cambiar imagen</label>
+            <input type="file" name="archivoImagen" class="form-control" accept="image/*" />
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-warning fw-bold">Actualizar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

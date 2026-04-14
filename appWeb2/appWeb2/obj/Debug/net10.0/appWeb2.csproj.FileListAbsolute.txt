@@ -370,10 +370,7 @@ C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\a
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
-C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\scopedcss\bundle\appWeb2.styles.css
-C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\scopedcss\projectbundle\appWeb2.bundle.scp.css
-C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\compressed\9y0tmsvc2e-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\compressed\ckrk77qgom-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\compressed\rqzph5iktm-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\compressed\k86yjmkssn-{0}-t1cqhe9u97-t1cqhe9u97.gz
@@ -435,8 +432,6 @@ C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\c
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\compressed\orgqdjsrox-{0}-9vr69e8ynj-9vr69e8ynj.gz
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\compressed\uonlch8gpd-{0}-87fc7y1x7t-87fc7y1x7t.gz
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\compressed\uzvrbvo8nd-{0}-mlv21k5csn-mlv21k5csn.gz
-C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\compressed\2j3rs1ydt8-{0}-ctxbqj4zor-ctxbqj4zor.gz
-C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\compressed\ekz1tdqme5-{0}-ctxbqj4zor-ctxbqj4zor.gz
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\staticwebassets.build.json
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\staticwebassets.build.json.cache
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\staticwebassets.development.json
@@ -449,3 +444,5 @@ C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\r
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\appWeb2.pdb
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\appWeb2.genruntimeconfig.cache
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\ref\appWeb2.dll
+C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\compressed\40z7nasm49-{0}-5s9ywvml60-5s9ywvml60.gz
+C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\obj\Debug\net10.0\compressed\9y0tmsvc2e-{0}-akzhr0jnpa-akzhr0jnpa.gz

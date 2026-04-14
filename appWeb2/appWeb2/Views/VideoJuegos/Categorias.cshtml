@@ -1,0 +1,35 @@
+@model List<string>
+
+@{
+    ViewData["Title"] = "Categorías";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-5 text-warning">
+        🎮 Categorías
+    </h2>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-warning text-center">
+            No hay categorías disponibles.
+        </div>
+    }
+    else
+    {
+        <div class="row g-4 justify-content-center">
+            @foreach (var cat in Model)
+            {
+                <div class="col-md-4 col-sm-6">
+                    <a asp-action="PorCategoria" asp-route-categoria="@cat" style="text-decoration:none;">
+                        <div class="card text-center p-4 shadow h-100 categoria-card">
+                            <div class="mb-3" style="font-size:2.5rem;">🕹️</div>
+                            <h4 class="fw-bold text-warning">@cat</h4>
+                            <p class="text-muted mb-0">Ver juegos</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</div>

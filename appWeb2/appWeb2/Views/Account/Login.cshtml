@@ -1,0 +1,50 @@
+@model appWeb2.Models.Login
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión - GameStore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="bg-dark-custom d-flex align-items-center justify-content-center" style="min-height:100vh;">
+
+    <div class="container" style="max-width:420px;">
+        <div class="card p-4 shadow rounded-4">
+            <h3 class="text-center mb-3 fw-bold text-warning">🎮 Iniciar Sesión</h3>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form method="post" asp-action="Login">
+                <div class="mb-3">
+                    <label class="form-label">Correo</label>
+                    <input type="email" class="form-control" asp-for="correo" required />
+                    <span asp-validation-for="correo" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" asp-for="password" required />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-warning w-100 fw-bold">
+                    Ingresar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

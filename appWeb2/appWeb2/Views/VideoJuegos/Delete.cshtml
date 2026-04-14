@@ -1,23 +1,27 @@
-﻿@model appWeb2.Models.VideoJuegos
+@model appWeb2.Models.VideoJuegos
 
-<h2>Eliminar Videojuego</h2>
+@{
+    ViewData["Title"] = "Eliminar Videojuego";
+}
 
-<h4>¿Estás seguro que deseas eliminar esto?</h4>
+<div class="container mt-4" style="max-width:500px;">
+    <h2 class="fw-bold text-danger mb-4">🗑️ Eliminar Videojuego</h2>
 
-<div>
-    <strong>@Model.titulo</strong> - $@Model.precio
+    <div class="card shadow p-4">
+        <h5 class="mb-3">¿Estás seguro que deseas eliminar este juego?</h5>
+
+        <ul class="list-group mb-4">
+            <li class="list-group-item"><strong>Título:</strong> @Model.titulo</li>
+            <li class="list-group-item"><strong>Categoría:</strong> @Model.categoria</li>
+            <li class="list-group-item"><strong>Precio:</strong> $@Model.precio</li>
+        </ul>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-danger fw-bold">Sí, eliminar</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </div>
-
-<form asp-action="Delete">
-
-    <input type="hidden" asp-for="Id" />
-
-    <button type="submit" class="btn btn-danger">
-        Eliminar
-    </button>
-
-    <a asp-action="Index" class="btn btn-secondary">
-        Cancelar
-    </a>
-
-</form>

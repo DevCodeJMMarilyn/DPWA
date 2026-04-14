@@ -1,38 +1,41 @@
-﻿using appWeb2.Models;
+using appWeb2.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace appWeb2.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) 
-            : base(options)
-        {}
-        public DbSet<Usuario> Usuarios { get; set; }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
+
         public DbSet<VideoJuegos> VideoJuegos { get; set; }
-        public DbSet<Compra> Compras { get; set; }
-        
-        ////protected override void OnModelCreating(ModelBuilder modelBuilder)
-        ////{
-        // //   base.OnModelCreating(modelBuilder);
+        public DbSet<Usuario> Usuarios { get; set; }
 
-        //    modelBuilder.Entity<Usuario>()
-        //            .HasIndex(u => u.correo)
-        //            .IsUnique();
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        //    modelBuilder.Entity<Compra>()
-        //        .HasOne(c => c.Usuario)
-        //        .WithMany(u => u.Compras)
-        //        .HasForeignKey(c => c.UsuarioId)
-        //        .OnDelete(DeleteBehavior.Cascade);
+            // Mapear tabla VideoJuegos
+            modelBuilder.Entity<VideoJuegos>(entity =>
+            {
+                entity.ToTable("VideoJuegos");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.precio).HasColumnType("decimal(10,2)");
+                entity.Property(e => e.FechaRegistro).HasDefaultValueSql("GETDATE()");
+                entity.Property(e => e.enPromocion).HasDefaultValue(false);
+                entity.Property(e => e.edadMinima).HasDefaultValue(0);
+            });
 
-        //    modelBuilder.Entity<Compra>()
-        //            .HasOne(c => c.VideoJuegos)
-        //            .WithMany(v => v.Compras)
-        //            .HasForeignKey(c => c.VideoJuegosId)
-        //            .OnDelete(DeleteBehavior.Cascade);
-
-
-        //}
+            // Mapear tabla Usuarios
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.ToTable("Usuarios");
+                entity.HasKey(e => e.Id);
+                entity.HasIndex(e => e.correo).IsUnique();
+                entity.Property(e => e.password).HasColumnType("varbinary(64)");
+                entity.Property(e => e.FechaRegistro).HasDefaultValueSql("GETDATE()");
+            });
+        }
     }
 }

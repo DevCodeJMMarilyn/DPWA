@@ -15,32 +15,33 @@ namespace appWeb2.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult>Index()
+        // GET: /Home/Index  → página principal con todos los juegos
+        public async Task<IActionResult> Index()
         {
             var juegos = await _context.VideoJuegos.ToListAsync();
             return View(juegos);
         }
 
+        // GET: /Home/Privacy
         public IActionResult Privacy()
         {
             return View();
         }
 
+        // GET: /Home/Contacts
         public IActionResult Contacts()
         {
             return View();
         }
+
+        // GET: /Home/Error
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-
-        public IActionResult Calcular(Notas model)
-        {
-            model.promedio = (model.n1 + model.n2 + model.n3) / 3;
-            return View("Index", model);
-        }
-
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
     }
 }

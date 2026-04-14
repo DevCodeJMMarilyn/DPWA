@@ -1,52 +1,94 @@
 ﻿@model IEnumerable<appWeb2.Models.VideoJuegos>
 @{
-    ViewData["Title"] = "Home Page";
-    Layout = "admin";
-
+    ViewData["Title"] = "Videojuegos";
 }
 
-<br/>
-<h2>Videojuegos Disponibles</h2>
+<div class="row text-center mb-5">
 
-<div class="row">
-    @foreach (var juego in Model)
-    {
-        <div class=" col-md-4">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">@juego.titulo</h5>
-                    <p class="card-text">@juego.descripcion</p>
-                    <p><strong>Categoria:</strong>@juego.categoria</p>
-                    <p>
-                        <strong>Precio:</strong>@juego.precio
-                    </p>
+    <!-- CATEGORÍAS -->
+    <div class="col-md-3 mb-3">
+        <a asp-controller="VideoJuegos" asp-action="Categorias" style="text-decoration:none;">
+            <div class="feature-card">
+                <i class="fas fa-gamepad"></i>
+                <h5>Categorías</h5>
+                <p>Explora por tipo de juego</p>
+            </div>
+        </a>
+    </div>
+
+    <!-- MÁS VENDIDOS -->
+    <div class="col-md-3 mb-3">
+        <div class="feature-card">
+            <i class="fas fa-fire"></i>
+            <h5>Más Vendidos</h5>
+            <p>Los juegos más populares</p>
+        </div>
+    </div>
+
+    <!-- NUEVOS -->
+    <div class="col-md-3 mb-3">
+        <a asp-controller="VideoJuegos" asp-action="Nuevos" style="text-decoration:none;">
+            <div class="feature-card">
+                <i class="fas fa-star"></i>
+                <h5>Nuevos Juegos</h5>
+                <p>Lo último en la tienda</p>
+            </div>
+        </a>
+    </div>
+
+    <!-- PROMOCIONES -->
+    <div class="col-md-3 mb-3">
+        <a asp-controller="VideoJuegos" asp-action="Promociones" style="text-decoration:none;">
+            <div class="feature-card">
+                <i class="fas fa-tags"></i>
+                <h5>Promociones</h5>
+                <p>Ofertas especiales</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+    <h2 class="text-center fw-bold mb-4" style="color: #FFD700;"> Videojuegos Disponibles</h2>
+    <div class="row g-4">
+        @foreach (var juego in Model)
+        {
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="card game-card h-100">
+
+                    <!-- 🔴 BADGE SUPERIOR -->
+                    <div class="badge-top">+@juego.edadMinima</div>
+
+                    <!-- ❤️ FAVORITO -->
+                    <div class="favorite">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+
+                    <!-- IMAGEN -->
+                    <img src="@juego.imagen"
+                         class="card-img-top game-img" />
+
+                    <div class="card-body d-flex flex-column">
+
+                        <!-- TÍTULO -->
+                        <h5 class="card-title fw-bold">
+                            @juego.titulo
+                        </h5>
+
+
+                        <!-- PRECIO -->
+                        <h4 class="price mt-2">
+                            $@juego.precio
+                        </h4>
+
+                        <!-- CATEGORÍA -->
+                        <div class="d-flex align-items-center mt-auto">
+                            <i class="fa-solid fa-gamepad me-2 text-warning"></i>
+                            <span class="text-muted">@juego.categoria</span>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
 </div>
-
-@*
-    @model Notas;
-    <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-@{
-    string nombre = "Michelle";
-}
-<h1>Hola @nombre</h1>
-*@
-
-
-@* 
-    <form asp-controller="Home" asp-action="Calcular" method="post">
-    <input type="number" asp-for="n1" placeholder="Número 1" /><br /> <br />
-    <input type="number" asp-for="n2" placeholder="Número 2" /><br /> <br />
-    <input type="number" asp-for="n3" placeholder="Número 3" /><br /> <br />
-    <br /><br />
-    <input type="submit" value="Calcular" />
-</form>
-
-<h1>El promedio es: @Model.promedio</h1>
- *@

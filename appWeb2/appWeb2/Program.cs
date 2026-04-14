@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
         builder.Configuration.GetConnectionString("con"));
 });
 
+builder.Services.AddSession(); //este
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,8 +31,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
 
+app.MapStaticAssets();
+app.UseSession(); //este
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")

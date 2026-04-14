@@ -1,0 +1,64 @@
+@model IEnumerable<appWeb2.Models.VideoJuegos>
+
+@{
+    ViewData["Title"] = "Juegos de " + ViewData["Categoria"];
+    string categoria = ViewData["Categoria"]?.ToString() ?? "Categoría";
+}
+
+<div class="container mt-5">
+
+    <div class="d-flex align-items-center mb-4 gap-3">
+        <a asp-action="Categorias" class="btn btn-outline-warning btn-sm">
+            ← Volver a Categorías
+        </a>
+        <h2 class="fw-bold text-warning mb-0">
+            🕹️ @categoria
+        </h2>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-center">
+            No hay juegos disponibles en esta categoría.
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var juego in Model)
+            {
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="card game-card h-100 position-relative">
+
+                        <div class="badge-top">+@juego.edadMinima</div>
+
+                        @if (juego.enPromocion)
+                        {
+                            <div class="badge-promo">🔥 PROMO</div>
+                        }
+
+                        <img src="@juego.imagen" class="card-img-top game-img" alt="@juego.titulo" />
+
+                        <div class="card-body d-flex flex-column color-white">
+
+                            <h5 class="card-title fw-bold">@juego.titulo</h5>
+
+                            <p class="text-muted small flex-grow-1">@juego.descripcion</p>
+
+                            <h4 class="price mt-2 @(juego.enPromocion ? "text-danger" : "")">
+                                $@juego.precio
+                            </h4>
+
+                            <div class="d-flex align-items-center mt-auto">
+                                <i class="fa-solid fa-gamepad me-2 text-warning"></i>
+                                <span class="text-muted">@juego.categoria</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>

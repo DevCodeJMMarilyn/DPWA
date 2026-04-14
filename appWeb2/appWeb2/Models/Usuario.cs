@@ -1,30 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Data;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace appWeb2.Models
 {
+    [Table("Usuarios")]
     public class Usuario
     {
-        [Key]
-        [StringLength(100)]
         public int Id { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string nombre { get; set; }
+        public string nombre { get; set; } = string.Empty;
 
         [Required]
-        [EmailAddress]
-        [StringLength(150)]
-        public string correo { get; set; }
+        [StringLength(200)]
+        public string correo { get; set; } = string.Empty;
+
+        // Guardado como VARBINARY(64) en SQL Server → byte[] en C#
+        public byte[] password { get; set; } = Array.Empty<byte>();
 
         [Required]
-        [StringLength(255)]
-        public string password { get; set; }
+        [StringLength(50)]
+        public string salt { get; set; } = string.Empty;
 
-        [Required]
-        public DateTime FechaRegistro { get; set; } = DateTime.Now;  
-        
-        public ICollection<Compra> Compras { get; set; }
+        public DateTime FechaRegistro { get; set; } = DateTime.Now;
     }
 }

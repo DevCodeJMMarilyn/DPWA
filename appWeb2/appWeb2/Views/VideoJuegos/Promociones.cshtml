@@ -1,0 +1,53 @@
+@model IEnumerable<appWeb2.Models.VideoJuegos>
+
+@{
+    ViewData["Title"] = "Promociones";
+}
+
+<div class="container mt-5">
+
+    <h2 class="text-center fw-bold mb-4" style="color:#FFD700;">
+        🔥 Juegos en Promoción
+    </h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-center">
+            No hay juegos en promoción actualmente.
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var juego in Model)
+            {
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="card game-card h-100 border-warning position-relative">
+
+                        <div class="badge-top">+@juego.edadMinima</div>
+
+                        <img src="@juego.imagen" class="card-img-top game-img" alt="@juego.titulo" />
+
+                        <div class="card-body d-flex flex-column">
+
+                            <h5 class="card-title fw-bold">
+                                @juego.titulo
+                            </h5>
+
+                            <h4 class="price mt-2 text-danger">
+                                $@juego.precio
+                            </h4>
+
+                            <div class="d-flex align-items-center mt-auto">
+                                <i class="fa-solid fa-gamepad me-2 text-warning"></i>
+                                <span class="text-muted">@juego.categoria</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>

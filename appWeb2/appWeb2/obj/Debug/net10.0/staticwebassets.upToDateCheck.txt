@@ -1,5 +1,23 @@
 wwwroot\css\site.css
+wwwroot\css\site.rar
 wwwroot\favicon.ico
+wwwroot\imagenes\08eba8ec-ff44-4283-a6c6-cc17e1e2eb50.jfif
+wwwroot\imagenes\391e91b9-b791-4e56-86af-a8c401f78a2f.jpg
+wwwroot\imagenes\3a6af29c-1391-40cc-a5dc-4befabf6859e.jpg
+wwwroot\imagenes\4ae9f0e0-33cd-40ad-a66f-37057ce8e8bf.jpg
+wwwroot\imagenes\4c81636a-caa5-4e97-a272-ed0ff684087f.jfif
+wwwroot\imagenes\645fe4be-fc2a-4ac5-9a04-2764d48cd028.jpg
+wwwroot\imagenes\7470be38-05ee-439d-b0fc-30152b75cdaf.jpg
+wwwroot\imagenes\8733792c-e6b4-48ce-a5a8-f5bb3c3036a7.jpg
+wwwroot\imagenes\8fd8ba2d-6fa9-4068-9d8d-2beb85b03ecd.jpg
+wwwroot\imagenes\ac959f37-3c3f-43d3-a3ca-d60cf8573d06.jpg
+wwwroot\imagenes\b5932463-bd1b-41af-86e5-bc279c0a02b0.jpg
+wwwroot\imagenes\cfe5b375-c2a6-45d3-ace8-46b30200c2e1.jpg
+wwwroot\imagenes\e8d15c3a-932c-4655-a862-6c14a0ccde6c.jpg
+wwwroot\imagenes\ecbc095b-ea3d-49ff-8eb7-b0de70545bfd.webp
+wwwroot\imagenes\fd0a7947-9716-486e-b925-35d369b229de.jfif
+wwwroot\img\banner.png
+wwwroot\js\favoritos.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
@@ -61,6 +79,7 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\img\banner.jpg
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\wwwroot\lib\jquery\LICENSE.txt
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\wwwroot\lib\jquery\dist\jquery.slim.min.map
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\wwwroot\lib\jquery\dist\jquery.slim.min.js
@@ -121,5 +140,6 @@ C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\wwwroot\lib\bootstr
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\wwwroot\js\site.js
-C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\wwwroot\favicon.ico
 C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\wwwroot\css\site.css
+C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\wwwroot\favicon.ico
+C:\Users\Michelle Jiménez\source\repos\DPWA\appWeb2\appWeb2\wwwroot\js\favoritos.js
