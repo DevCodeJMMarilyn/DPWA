@@ -18,7 +18,7 @@ namespace appWeb2.Models
 
         [Required(ErrorMessage = "La categoría es obligatoria.")]
         [StringLength(100)]
-        public string categoria { get; set; } = string.Empty;
+        public int idcategoria { get; set; }
 
         [StringLength(2000)]
         public string? descripcion { get; set; }

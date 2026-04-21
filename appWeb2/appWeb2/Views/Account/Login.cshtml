@@ -9,13 +9,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iniciar Sesión - GameStore</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
+
 <body class="bg-dark-custom d-flex align-items-center justify-content-center" style="min-height:100vh;">
 
     <div class="container" style="max-width:420px;">
         <div class="card p-4 shadow rounded-4">
+
             <h3 class="text-center mb-3 fw-bold text-warning">🎮 Iniciar Sesión</h3>
 
             @if (ViewBag.Error != null)
@@ -26,25 +29,36 @@
             }
 
             <form method="post" asp-action="Login">
+                
+                @Html.AntiForgeryToken()
+
                 <div class="mb-3">
                     <label class="form-label">Correo</label>
-                    <input type="email" class="form-control" asp-for="correo" required />
-                    <span asp-validation-for="correo" class="text-danger"></span>
+                    <input type="email" class="form-control" asp-for="correo" placeholder="ejemplo@gmail.com" required />
+                    <span asp-validation-for="correo" class="text-danger small"></span>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" asp-for="password" required />
-                    <span asp-validation-for="password" class="text-danger"></span>
+                    <input type="password" class="form-control" asp-for="password" placeholder="••••••••" required />
+                    <span asp-validation-for="password" class="text-danger small"></span>
                 </div>
+
                 <button type="submit" class="btn btn-warning w-100 fw-bold">
                     Ingresar
                 </button>
+
             </form>
         </div>
     </div>
 
+    <!-- mis scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Scripts del inge (VALIDACIONES) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
 
 </body>
 </html>

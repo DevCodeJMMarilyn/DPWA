@@ -6,7 +6,7 @@
 <div class="row text-center mb-5">
 
     <!-- CATEGORÍAS -->
-    <div class="col-md-3 mb-3">
+    @* <div class="col-md-3 mb-3">
         <a asp-controller="VideoJuegos" asp-action="Categorias" style="text-decoration:none;">
             <div class="feature-card">
                 <i class="fas fa-gamepad"></i>
@@ -14,7 +14,7 @@
                 <p>Explora por tipo de juego</p>
             </div>
         </a>
-    </div>
+    </div> *@
 
     <!-- MÁS VENDIDOS -->
     <div class="col-md-3 mb-3">
@@ -84,7 +84,7 @@
                         <!-- CATEGORÍA -->
                         <div class="d-flex align-items-center mt-auto">
                             <i class="fa-solid fa-gamepad me-2 text-warning"></i>
-                            <span class="text-muted">@juego.categoria</span>
+                            <span class="text-muted">@juego.idcategoria</span>
                         </div>
 
                     </div>

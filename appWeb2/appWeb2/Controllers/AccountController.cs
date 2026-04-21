@@ -1,4 +1,5 @@
 using appWeb2.Data;
+using appWeb2.Filtros;
 using appWeb2.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,13 +17,30 @@ namespace appWeb2.Controllers
             _context = context;
         }
 
-        // GET: /Account/Index  → muestra el formulario de login
+        [SessionAuthorize]
+        public IActionResult Dashboard()
+        {
+            var data = (from v in _context.VideoJuegos
+                        join c in _context.categorias
+                        on v.idcategoria equals c.idcategoria
+                        group v by c.categoria into g
+                        select new
+                        {
+                            Categoria = g.Key,
+                            Total = g.Count()
+                        }).ToList();
+            ViewBag.Categorias = data.Select(x=> x.Categoria).ToList();
+            ViewBag.Totales = data.Select(x => x.Total).ToList();
+            return View();
+        }
+
+        //// GET: /Account/Index  → muestra el formulario de login
         public IActionResult Index()
         {
             return View("Login");
         }
 
-        // GET: /Account/Login
+        //// GET: /Account/Login
         [HttpGet]
         public IActionResult Login()
         {
@@ -47,15 +65,23 @@ namespace appWeb2.Controllers
 
                 using (SHA256 sha256 = SHA256.Create())
                 {
-                    byte[] inputBytes = Encoding.UTF8.GetBytes(saltedPassword);
+                    //byte[] inputBytes = Encoding.UTF8.GetBytes(saltedPassword);
+                    byte[] inputBytes = Encoding.Unicode.GetBytes(saltedPassword);
                     byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                    
+                    //Console.WriteLine("Salt DB: " + user.salt);
+                    //Console.WriteLine("Password input: " + model.password);
+                    //Console.WriteLine("Salted: " + (user.salt + model.password));
 
+                    //Console.WriteLine("Hash generado: " + Convert.ToBase64String(hashBytes));
+                    //Console.WriteLine("Hash DB: " + Convert.ToBase64String(user.password));
                     // Comparar el hash calculado con el guardado en BD
                     if (hashBytes.SequenceEqual(user.password))
                     {
                         HttpContext.Session.SetString("usuario", user.nombre);
-                        HttpContext.Session.SetInt32("usuarioId", user.Id);
-                        return RedirectToAction("Index", "Home");
+                        //HttpContext.Session.SetString("nombre", user.nombre);
+
+                        return RedirectToAction("Dashboard", "Account");
                     }
                 }
             }

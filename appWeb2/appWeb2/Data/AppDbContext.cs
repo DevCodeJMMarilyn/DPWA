@@ -5,13 +5,16 @@ namespace appWeb2.Data
 {
     public class AppDbContext : DbContext
     {
+        internal object categoria;
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
 
         public DbSet<VideoJuegos> VideoJuegos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-
+        public DbSet<Compra> Compras { get; set; }
+        public DbSet<Categoria> categorias { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -1,10 +1,13 @@
 using appWeb2.Data;
+using appWeb2.Filtros;
 using appWeb2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace appWeb2.Controllers
 {
+    [SessionAuthorize]
     public class VideoJuegosController : Controller
     {
         private readonly AppDbContext _context;
@@ -19,7 +22,8 @@ namespace appWeb2.Controllers
             var juegos = await _context.VideoJuegos
                 .OrderByDescending(j => j.FechaRegistro)
                 .ToListAsync();
-                return View("admin", juegos);
+            
+            return View("admin", juegos);
             // return RedirectToAction("Index", "VideoJuegos");
         }
  
@@ -31,7 +35,7 @@ namespace appWeb2.Controllers
             var juegos = await _context.VideoJuegos
                 .OrderByDescending(j => j.FechaRegistro)
                 .ToListAsync();
-            return View(juegos);
+            return View("admin", juegos);
         }
 
         // GET: /VideoJuegos/Create
@@ -91,7 +95,7 @@ namespace appWeb2.Controllers
             // Actualizar campos
             juegoBD.titulo      = juego.titulo;
             juegoBD.precio      = juego.precio;
-            juegoBD.categoria   = juego.categoria;
+            juegoBD.idcategoria   = juego.idcategoria;
             juegoBD.descripcion = juego.descripcion;
             juegoBD.edadMinima  = juego.edadMinima;
             juegoBD.enPromocion = juego.enPromocion;
@@ -168,7 +172,7 @@ namespace appWeb2.Controllers
         public async Task<IActionResult> Categorias()
         {
             var categorias = await _context.VideoJuegos
-                .Select(j => j.categoria)
+                .Select(j => j.idcategoria)
                 .Distinct()
                 .OrderBy(c => c)
                 .ToListAsync();
@@ -178,13 +182,14 @@ namespace appWeb2.Controllers
 
         // GET: /VideoJuegos/PorCategoria?categoria=RPG
         [HttpGet]
-        public async Task<IActionResult> PorCategoria(string categoria)
+        public async Task<IActionResult> PorCategoria(int categoria)
         {
-            if (string.IsNullOrEmpty(categoria))
+            //if (string.IsNullOrEmpty(categoria))
+            if (categoria == 0)
                 return RedirectToAction(nameof(Categorias));
 
             var juegos = await _context.VideoJuegos
-                .Where(j => j.categoria == categoria)
+                .Where(j => j.idcategoria == categoria)
                 .ToListAsync();
 
             ViewData["Categoria"] = categoria;
