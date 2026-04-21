@@ -20,17 +20,17 @@ namespace appWeb2.Controllers
         [SessionAuthorize]
         public IActionResult Dashboard()
         {
-            var data = (from v in _context.VideoJuegos
-                        join c in _context.categorias
-                        on v.idcategoria equals c.idcategoria
-                        group v by c.categoria into g
-                        select new
-                        {
-                            Categoria = g.Key,
-                            Total = g.Count()
-                        }).ToList();
-            ViewBag.Categorias = data.Select(x=> x.Categoria).ToList();
-            ViewBag.Totales = data.Select(x => x.Total).ToList();
+            //var data = (from v in _context.VideoJuegos
+            //            join c in _context.categorias
+            //            on v.idcategoria equals c.idcategoria
+            //            group v by c.categoria into g
+            //            select new
+            //            {
+            //                Categoria = g.Key,
+            //                Total = g.Count()
+            //            }).ToList();
+            //ViewBag.Categorias = data.Select(x=> x.Categoria).ToList();
+            //ViewBag.Totales = data.Select(x => x.Total).ToList();
             return View();
         }
 
@@ -45,6 +45,52 @@ namespace appWeb2.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+
+        ////codigo de clase grafica quemada
+        ////public IActionResult ObtenerDatos(string categoria)
+        ////{
+        ////    var query = from v in _context.VideoJuegos
+        ////                join c in _context.categorias
+        ////                on v.idcategoria equals c.idcategoria
+        ////                select new { c.categoria };
+        ////    if (!string.IsNullOrEmpty(categoria))
+        ////    {
+        ////        query = query.Where(x => x.categoria == categoria);
+        ////    }
+
+        ////    var data = query
+        ////        .GroupBy(x => x.categoria)
+        ////        .Select(g => new
+        ////        {
+        ////            categoria = g.Key,
+        ////            total = g.Count()
+        ////        }).ToList();
+
+        ////    return Json(data);
+        ////}
+        //Codigo de graficos sql 
+        public IActionResult ObtenerDatos(int? idcategoria)
+        {
+            var query = from v in _context.VideoJuegos
+                        join c in _context.categorias
+                        on v.idcategoria equals c.idcategoria
+                        select new { c.categoria, v.idcategoria };
+
+            if (idcategoria.HasValue)
+            {
+                query = query.Where(x => x.idcategoria == idcategoria.Value);
+            }
+
+            var data = query
+                .GroupBy(x => x.categoria)
+                .Select(g => new
+                {
+                    categoria = g.Key,
+                    total = g.Count()
+                }).ToList();
+
+            return Json(data);
         }
 
         // POST: /Account/Login

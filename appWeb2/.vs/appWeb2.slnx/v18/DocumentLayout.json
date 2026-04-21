@@ -3,28 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\dpwa\\appweb2\\appweb2\\controllers\\videojuegoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\controllers\\videojuegoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\dpwa\\appweb2\\appweb2\\views\\account\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\views\\account\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\dpwa\\appweb2\\appweb2\\views\\shared\\admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\views\\shared\\admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\dpwa\\appweb2\\appweb2\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\dpwa\\appweb2\\appweb2\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\dpwa\\appweb2\\appweb2\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\dpwa\\appweb2\\appweb2\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\dpwa\\appweb2\\appweb2\\views\\videojuegos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\views\\videojuegos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\dpwa\\appweb2\\appweb2\\views\\videojuegos\\nuevos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\views\\videojuegos\\nuevos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|c:\\users\\michelle jim\u00E9nez\\source\\repos\\dpwa\\appweb2\\appweb2\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9C489E-056B-F73E-D0BD-58AEDB7DE61E}|appWeb2\\appWeb2.csproj|solutionrelative:appweb2\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,85 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\VideoJuegos\\Index.cshtml",
-              "RelativeDocumentMoniker": "appWeb2\\Views\\VideoJuegos\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\VideoJuegos\\Index.cshtml",
-              "RelativeToolTip": "appWeb2\\Views\\VideoJuegos\\Index.cshtml",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAAEIAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-26T12:31:32.347Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "admin.cshtml",
-              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\Shared\\admin.cshtml",
-              "RelativeDocumentMoniker": "appWeb2\\Views\\Shared\\admin.cshtml",
-              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\Shared\\admin.cshtml",
-              "RelativeToolTip": "appWeb2\\Views\\Shared\\admin.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-26T16:16:31.42Z",
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "appWeb2\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "appWeb2\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAiwF0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T09:44:01.1Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "VideoJuegosController.cs",
-              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Controllers\\VideoJuegosController.cs",
-              "RelativeDocumentMoniker": "appWeb2\\Controllers\\VideoJuegosController.cs",
-              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Controllers\\VideoJuegosController.cs",
-              "RelativeToolTip": "appWeb2\\Controllers\\VideoJuegosController.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwCYAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T16:14:05.518Z",
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\Account\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "appWeb2\\Views\\Account\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\Account\\Dashboard.cshtml",
+              "RelativeToolTip": "appWeb2\\Views\\Account\\Dashboard.cshtml",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAYwM0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-21T09:43:37.847Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "appWeb2\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "appWeb2\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAEIAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-03-26T13:38:52.775Z",
+              "Title": "Categoria.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Models\\Categoria.cs",
+              "RelativeDocumentMoniker": "appWeb2\\Models\\Categoria.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Models\\Categoria.cs",
+              "RelativeToolTip": "appWeb2\\Models\\Categoria.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T09:11:34.674Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "appWeb2\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "appWeb2\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA1AAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\VideoJuegos\\Index.cshtml",
+              "RelativeDocumentMoniker": "appWeb2\\Views\\VideoJuegos\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\VideoJuegos\\Index.cshtml",
+              "RelativeToolTip": "appWeb2\\Views\\VideoJuegos\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-26T12:32:44.174Z",
+              "WhenOpened": "2026-04-21T09:03:56.104Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Nuevos.cshtml",
-              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\VideoJuegos\\Nuevos.cshtml",
-              "RelativeDocumentMoniker": "appWeb2\\Views\\VideoJuegos\\Nuevos.cshtml",
-              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Views\\VideoJuegos\\Nuevos.cshtml",
-              "RelativeToolTip": "appWeb2\\Views\\VideoJuegos\\Nuevos.cshtml",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-26T08:49:46.342Z",
+              "DocumentIndex": 4,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "appWeb2\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Michelle Jim\u00E9nez\\source\\repos\\DPWA\\appWeb2\\appWeb2\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "appWeb2\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T09:03:25.52Z",
               "EditorCaption": ""
             }
           ]

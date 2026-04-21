@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Michelle Jiménez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj": {}
+    "C:\\Users\\Michelle Jiménez\\source\\repos\\DPWA\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Michelle Jiménez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj": {
+    "C:\\Users\\Michelle Jiménez\\source\\repos\\DPWA\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Michelle Jiménez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj",
+        "projectUniqueName": "C:\\Users\\Michelle Jiménez\\source\\repos\\DPWA\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj",
         "projectName": "appMishiEnvios",
-        "projectPath": "C:\\Users\\Michelle Jiménez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj",
+        "projectPath": "C:\\Users\\Michelle Jiménez\\source\\repos\\DPWA\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj",
         "packagesPath": "C:\\Users\\Michelle Jiménez\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Michelle Jiménez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\obj\\",
+        "outputPath": "C:\\Users\\Michelle Jiménez\\source\\repos\\DPWA\\appMishiEnvios\\appMishiEnvios\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

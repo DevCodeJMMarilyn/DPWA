@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("appMishiEnvios")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+573aa3d438a38d354764c41665592a817cee8c22")]
 [assembly: System.Reflection.AssemblyProductAttribute("appMishiEnvios")]
 [assembly: System.Reflection.AssemblyTitleAttribute("appMishiEnvios")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

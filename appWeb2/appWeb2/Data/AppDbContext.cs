@@ -5,7 +5,7 @@ namespace appWeb2.Data
 {
     public class AppDbContext : DbContext
     {
-        internal object categoria;
+        //internal object categoria;
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {

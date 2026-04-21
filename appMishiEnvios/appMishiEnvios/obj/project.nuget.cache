@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "25TchmYi6P4=",
+  "dgSpecHash": "1T2UxLopgbU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Michelle Jiménez\\source\\repos\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj",
+  "projectFilePath": "C:\\Users\\Michelle Jiménez\\source\\repos\\DPWA\\appMishiEnvios\\appMishiEnvios\\appMishiEnvios.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Michelle Jiménez\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\Michelle Jiménez\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
