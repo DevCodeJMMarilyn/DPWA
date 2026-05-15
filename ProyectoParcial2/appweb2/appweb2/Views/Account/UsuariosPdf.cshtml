@@ -1,0 +1,230 @@
+@model appweb2.Models.ReporteUsuariosPdfViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@Model.NombreArchivo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #111827;
+            font-size: 12px;
+        }
+
+        .header {
+            display: table;
+            width: 100%;
+            border-bottom: 3px solid #7c3aed;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .brand, .report-meta {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .brand img {
+            max-height: 72px;
+            margin-right: 14px;
+            vertical-align: middle;
+        }
+
+        .brand-text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 0 0 4px;
+            font-size: 24px;
+        }
+
+        h2 {
+            margin: 0 0 8px;
+            font-size: 15px;
+            color: #312e81;
+        }
+
+        .subtitle {
+            color: #4b5563;
+            font-size: 13px;
+        }
+
+        .report-meta {
+            text-align: right;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .summary {
+            display: table;
+            width: 100%;
+            border-spacing: 10px 0;
+            margin-bottom: 18px;
+        }
+
+        .filters {
+            border: 1px solid #d1d5db;
+            background: #f9fafb;
+            padding: 10px;
+            margin-bottom: 14px;
+        }
+
+        .card {
+            display: table-cell;
+            border: 1px solid #d1d5db;
+            padding: 12px;
+            background: #ffffff;
+        }
+
+        .label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        .value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4c1d95;
+        }
+
+        .section {
+            margin-bottom: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 7px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #312e81;
+            color: #ffffff;
+            font-size: 11px;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="brand">
+            <img src="@Url.Content("~/img/logo.png")" alt="MishiGames" />
+            <div class="brand-text">
+                <h1>Reporte de usuarios registrados</h1>
+                <div class="subtitle">MishiGames - Cuentas creadas en la plataforma</div>
+            </div>
+        </div>
+        <div class="report-meta">
+            <div><strong>Generado:</strong> @Model.FechaGeneracion.ToString("dd/MM/yyyy HH:mm:ss")</div>
+            <div><strong>Archivo:</strong> @Model.NombreArchivo</div>
+        </div>
+    </div>
+
+    <div class="filters">
+        <strong>Filtros:</strong>
+        Usuario: @(string.IsNullOrWhiteSpace(Model.Busqueda) ? "Todos" : Model.Busqueda) |
+        Rol: @(string.IsNullOrWhiteSpace(Model.RolFiltro) ? "Todos" : Model.RolFiltro) |
+        Desde: @(Model.DesdeTexto ?? "Todos") |
+        Hasta: @(Model.HastaTexto ?? "Todos")
+    </div>
+
+    <div class="summary">
+        <div class="card">
+            <div class="label">Usuarios registrados</div>
+            <div class="value">@Model.TotalUsuarios</div>
+        </div>
+        @foreach (var rol in Model.ResumenRoles.Take(3))
+        {
+            <div class="card">
+                <div class="label">@rol.Rol</div>
+                <div class="value">@rol.Total</div>
+            </div>
+        }
+    </div>
+
+    @if (Model.ResumenRoles.Count > 3)
+    {
+        <div class="section">
+            <h2>Resumen por rol</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rol</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rol in Model.ResumenRoles)
+                    {
+                        <tr>
+                            <td>@rol.Rol</td>
+                            <td class="text-right">@rol.Total</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <div class="section">
+        <h2>Detalle de usuarios</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Fecha de registro</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Usuarios.Any())
+                {
+                    @foreach (var usuario in Model.Usuarios)
+                    {
+                        <tr>
+                            <td>@usuario.Id</td>
+                            <td>@usuario.Nombre</td>
+                            <td>@usuario.Email</td>
+                            <td>@usuario.RolNombre</td>
+                            <td>@usuario.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5">No hay usuarios registrados con los filtros seleccionados.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

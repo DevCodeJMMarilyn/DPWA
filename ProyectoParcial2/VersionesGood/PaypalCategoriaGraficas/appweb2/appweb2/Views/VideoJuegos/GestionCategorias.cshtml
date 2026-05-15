@@ -1,0 +1,111 @@
+@model appweb2.Models.GestionCategoriasViewModel
+
+@{
+    ViewData["Title"] = "Gestión de categorías";
+}
+
+<div class="arcade-page-header mb-4">
+    <div>
+        <h2 class="arcade-page-title"><i class="fas fa-tags me-2"></i>Gestión de categorías</h2>
+        <p class="arcade-page-sub">Crea, renombra o elimina categorías de videojuegos.</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a class="btn-arcade-sm btn-arcade-outline" asp-action="Categorias">
+            <i class="fas fa-eye me-1"></i>Ver públicas
+        </a>
+        <a class="btn-arcade-sm btn-arcade-gold" asp-action="Create">
+            <i class="fas fa-plus me-1"></i>Nuevo juego
+        </a>
+    </div>
+</div>
+
+@if (TempData["CategoriaMensaje"] is string mensaje && !string.IsNullOrWhiteSpace(mensaje))
+{
+    <div class="arcade-alert-success mb-3"><i class="fas fa-check-circle me-2"></i>@mensaje</div>
+}
+@if (TempData["CategoriaError"] is string error && !string.IsNullOrWhiteSpace(error))
+{
+    <div class="arcade-alert-error mb-3"><i class="fas fa-exclamation-triangle me-2"></i>@error</div>
+}
+
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="arcade-panel">
+            <div class="arcade-panel-header">
+                <i class="fas fa-plus-circle me-2"></i>Agregar categoría
+            </div>
+            <div class="arcade-panel-body">
+                <form asp-action="CrearCategoria" method="post">
+                    <div asp-validation-summary="ModelOnly" class="arcade-alert-error mb-3"></div>
+                    <div class="arcade-field mb-3">
+                        <label asp-for="NuevaCategoriaNombre" class="arcade-label">Nombre</label>
+                        <input asp-for="NuevaCategoriaNombre" class="form-control arcade-input" placeholder="Ej. RPG, Deportes, Terror" />
+                        <span asp-validation-for="NuevaCategoriaNombre" class="arcade-field-error"></span>
+                    </div>
+                    <button type="submit" class="btn-arcade-primary w-100">
+                        <i class="fas fa-save me-2"></i>Guardar categoría
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="arcade-panel">
+            <div class="arcade-panel-header">
+                <i class="fas fa-list me-2"></i>Categorías actuales
+            </div>
+            <div class="arcade-panel-body p-0">
+                @if (Model.Categorias.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="arcade-table">
+                            <thead>
+                                <tr>
+                                    <th>Categoría</th>
+                                    <th>Videojuegos</th>
+                                    <th class="text-end">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var categoria in Model.Categorias)
+                                {
+                                    <tr>
+                                        <td>
+                                            <form asp-action="EditarCategoria" method="post" class="d-flex gap-2 align-items-center">
+                                                <input type="hidden" name="id" value="@categoria.Id" />
+                                                <input type="text" name="nombre" value="@categoria.Nombre" class="form-control arcade-input" style="min-width: 200px;" />
+                                                <button type="submit" class="btn-arcade-sm btn-arcade-outline">
+                                                    <i class="fas fa-pen"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <span class="arcade-badge-purple">@categoria.VideoJuegos.Count juegos</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <form asp-action="EliminarCategoria" method="post" class="d-inline">
+                                                <input type="hidden" name="id" value="@categoria.Id" />
+                                                <button type="submit" class="btn-arcade-sm btn-arcade-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="p-4 text-muted text-center">Todavía no hay categorías registradas.</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

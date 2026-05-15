@@ -1,0 +1,146 @@
+@model IEnumerable<appweb2.Models.VentaViewModel>
+@{
+    ViewData["Title"] = "Detalle Ventas";
+}
+
+<div class="arcade-page-header mb-4">
+    <div>
+        <h2 class="arcade-page-title"><i class="fas fa-receipt me-2"></i>Detalle de Ventas</h2>
+        <p class="arcade-page-sub">Consulta y filtra todas las transacciones registradas en la plataforma.</p>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+        <a class="btn-arcade-sm btn-arcade-danger"
+           asp-controller="Account"
+           asp-action="ReporteVentasPdf"
+           asp-route-desde="@(ViewBag.Desde != null ? ((DateTime)ViewBag.Desde).ToString("yyyy-MM-dd") : null)"
+           asp-route-hasta="@(ViewBag.Hasta != null ? ((DateTime)ViewBag.Hasta).ToString("yyyy-MM-dd") : null)"
+           asp-route-cliente="@ViewBag.Cliente"
+           asp-route-videojuego="@ViewBag.Videojuego">
+            <i class="fas fa-file-pdf me-1"></i>Descargar reporte
+        </a>
+        <a asp-controller="Account" asp-action="Dashboard" class="btn-arcade-sm btn-arcade-outline">
+            <i class="fas fa-arrow-left me-1"></i>Dashboard
+        </a>
+    </div>
+</div>
+
+@if (ViewBag.Error != null)
+{
+    <div class="arcade-alert-error mb-3">
+        <i class="fas fa-exclamation-triangle me-2"></i>@ViewBag.Error
+    </div>
+}
+
+<div class="arcade-panel mb-4">
+    <div class="arcade-panel-header">
+        <i class="fas fa-filter me-2"></i>Filtrar ventas
+    </div>
+    <div class="arcade-panel-body">
+        <form method="get">
+            <div class="filter-row">
+                <div class="filter-col">
+                    <label class="arcade-label">Desde</label>
+                    <input type="date" name="desde" class="form-control arcade-input"
+                           value="@(ViewBag.Desde != null ? ((DateTime)ViewBag.Desde).ToString("yyyy-MM-dd") : "")" />
+                </div>
+                <div class="filter-col">
+                    <label class="arcade-label">Hasta</label>
+                    <input type="date" name="hasta" class="form-control arcade-input"
+                           value="@(ViewBag.Hasta != null ? ((DateTime)ViewBag.Hasta).ToString("yyyy-MM-dd") : "")" />
+                </div>
+                <div class="filter-col">
+                    <label class="arcade-label">Cliente</label>
+                    <input type="text" name="cliente" class="form-control arcade-input"
+                           value="@ViewBag.Cliente" placeholder="Nombre o correo" />
+                </div>
+                <div class="filter-col">
+                    <label class="arcade-label">Videojuego</label>
+                    <input type="text" name="videojuego" class="form-control arcade-input"
+                           value="@ViewBag.Videojuego" placeholder="Título del juego" />
+                </div>
+                <div class="filter-col-actions">
+                    <button type="submit" class="btn-arcade-sm btn-arcade-primary">
+                        <i class="fas fa-search me-1"></i>Filtrar
+                    </button>
+                    <a asp-controller="Account" asp-action="DetalleVentas" class="btn-arcade-sm btn-arcade-outline">
+                        Limpiar
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="arcade-panel">
+    <div class="arcade-panel-header">
+        <i class="fas fa-table me-2"></i>Listado de ventas
+    </div>
+    <div class="arcade-panel-body p-0">
+        <div class="table-responsive">
+            <table class="arcade-table">
+                <thead>
+                    <tr>
+                        <th>Compra</th>
+                        <th>Usuario</th>
+                        <th>VideoJuego</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Código</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.idCompra</td>
+                                <td>@(!string.IsNullOrWhiteSpace(item.UsuarioNombre) ? item.UsuarioNombre : item.UsuarioId.ToString())</td>
+                                <td>@(!string.IsNullOrWhiteSpace(item.VideoJuegoTitulo) ? item.VideoJuegoTitulo : item.VideoJuegosId)</td>
+                                <td>@item.cantidad</td>
+                                <td><span class="price" style="font-size:1rem;">$@item.total</span></td>
+                                <td><span class="arcade-badge-success">@item.estadoCompra</span></td>
+                                <td>@item.fechaHoraTransaccion.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td><code class="arcade-code">@item.codigoTransaccion</code></td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center py-4" style="color: var(--text-muted);">
+                                No se encontraron ventas con los filtros seleccionados.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@if ((int)ViewBag.TotalPaginas > 1)
+{
+    <div class="mt-4 d-flex justify-content-center gap-2 flex-wrap">
+        @for (int i = 1; i <= (int)ViewBag.TotalPaginas; i++)
+        {
+            if (i == (int)ViewBag.PaginaActual)
+            {
+                <span class="btn-arcade-sm btn-arcade-primary">@i</span>
+            }
+            else
+            {
+                <a class="btn-arcade-sm btn-arcade-outline"
+                   asp-controller="Account"
+                   asp-action="DetalleVentas"
+                   asp-route-pagina="@i"
+                   asp-route-desde="@(ViewBag.Desde != null ? ((DateTime)ViewBag.Desde).ToString("yyyy-MM-dd") : null)"
+                   asp-route-hasta="@(ViewBag.Hasta != null ? ((DateTime)ViewBag.Hasta).ToString("yyyy-MM-dd") : null)"
+                   asp-route-cliente="@ViewBag.Cliente"
+                   asp-route-videojuego="@ViewBag.Videojuego">@i</a>
+            }
+        }
+    </div>
+}

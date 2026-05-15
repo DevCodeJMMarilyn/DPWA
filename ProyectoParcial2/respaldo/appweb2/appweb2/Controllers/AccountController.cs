@@ -1,0 +1,919 @@
+﻿using appweb2.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Identity.Client;
+using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using appweb2.filtros;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Rotativa.AspNetCore;
+using Rotativa.AspNetCore.Options;
+
+namespace appweb2.Controllers
+{
+    public class AccountController : Controller
+    {
+        private readonly AppDbContext _context;
+
+        public AccountController(AppDbContext context)
+        {
+            _context = context;
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var existe = _context.Usuarios.Any(u => u.Email == model.Email);
+            if (existe)
+            {
+                ViewBag.Error = "El correo ya está registrado";
+                return View(model);
+            }
+
+            var salt = Convert.ToBase64String(RandomNumberGenerator.GetBytes(16));
+            var saltedPassword = salt + model.Password;
+            byte[] hashBytes;
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(saltedPassword));
+            }
+
+            var user = new Usuario
+            {
+                Nombre = model.Nombre,
+                Email = model.Email,
+                Salt = salt,
+                Password = hashBytes,
+                RoleId = GetOrCreateRoleId("User"),
+                FechaRegistro = DateTime.Now
+            };
+
+            _context.Usuarios.Add(user);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Login(Login model)
+        {
+            if (string.IsNullOrWhiteSpace(model.correo) || string.IsNullOrWhiteSpace(model.password))
+            {
+                ViewBag.Error = "Credenciales Incorrectas";
+                return View("Index");
+            }
+
+            var user = _context.Usuarios
+                .Include(u => u.Role)
+                .FirstOrDefault(u => u.Email == model.correo);
+            if (user == null)
+            {
+                ViewBag.Error = "Credenciales Incorrectas";
+                return View("Index");
+            }
+
+            var saltedPassword = user.Salt + model.password;
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] inputBytesUnicode = Encoding.Unicode.GetBytes(saltedPassword);
+                byte[] hashBytesUnicode = sha256.ComputeHash(inputBytesUnicode);
+
+                byte[] inputBytesUtf8 = Encoding.UTF8.GetBytes(saltedPassword);
+                byte[] hashBytesUtf8 = sha256.ComputeHash(inputBytesUtf8);
+
+                if (hashBytesUnicode.SequenceEqual(user.Password) || hashBytesUtf8.SequenceEqual(user.Password))
+                {
+                    HttpContext.Session.SetString("usuario", user.Nombre);
+                    HttpContext.Session.SetInt32("usuarioId", user.Id);
+                    var roleNombre = user.Role != null ? user.Role.Nombre : string.Empty;
+                    HttpContext.Session.SetString("rol", roleNombre);
+
+                    if (string.Equals(roleNombre, "Admin", StringComparison.OrdinalIgnoreCase))
+                        return RedirectToAction(nameof(Dashboard));
+
+                    return RedirectToAction("Index", "VideoJuegos");
+                }
+            }
+
+            ViewBag.Error = "Credenciales Incorrectas";
+            return View("Index");
+        }
+
+        [HttpGet]
+        [AdminAuthorize]
+        public async Task<IActionResult> Dashboard()
+        {
+            var model = new DashboardViewModel
+            {
+                Categorias = await ObtenerResumenCategoriasAsync()
+            };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AdminAuthorize]
+        public async Task<IActionResult> ReporteVentasPdf(DateTime? desde, DateTime? hasta, string? cliente, string? videojuego)
+        {
+            cliente = cliente?.Trim();
+            videojuego = videojuego?.Trim();
+
+            var query = _context.DetalleCompras
+                .AsNoTracking()
+                .Include(d => d.Compra)
+                .ThenInclude(c => c.Usuario)
+                .Include(d => d.Compra)
+                .ThenInclude(c => c.VideoJuego)
+                .AsQueryable();
+
+            if (desde.HasValue)
+            {
+                var fechaDesde = desde.Value.Date;
+                query = query.Where(d => d.fechaHoraTransaccion >= fechaDesde);
+            }
+
+            if (hasta.HasValue)
+            {
+                var fechaHastaExclusiva = hasta.Value.Date.AddDays(1);
+                query = query.Where(d => d.fechaHoraTransaccion < fechaHastaExclusiva);
+            }
+
+            if (!string.IsNullOrWhiteSpace(cliente))
+            {
+                query = query.Where(d =>
+                    d.Compra != null &&
+                    d.Compra.Usuario != null &&
+                    ((d.Compra.Usuario.Nombre != null && d.Compra.Usuario.Nombre.Contains(cliente)) ||
+                     (d.Compra.Usuario.Email != null && d.Compra.Usuario.Email.Contains(cliente))));
+            }
+
+            if (!string.IsNullOrWhiteSpace(videojuego))
+            {
+                query = query.Where(d =>
+                    (d.Compra != null &&
+                     d.Compra.VideoJuego != null &&
+                     d.Compra.VideoJuego.Titulo != null &&
+                     d.Compra.VideoJuego.Titulo.Contains(videojuego)) ||
+                    (d.VideoJuegosId != null && d.VideoJuegosId.Contains(videojuego)));
+            }
+
+            var ventas = await query
+                .OrderByDescending(d => d.fechaHoraTransaccion)
+                .Select(d => new ReporteVentaDetalleItemViewModel
+                {
+                    CompraId = d.idCompra,
+                    Cliente = d.Compra != null && d.Compra.Usuario != null ? d.Compra.Usuario.Nombre : "N/D",
+                    Juego = d.Compra != null && d.Compra.VideoJuego != null ? d.Compra.VideoJuego.Titulo : d.VideoJuegosId,
+                    Cantidad = d.cantidad,
+                    Total = d.total,
+                    Estado = d.estadoCompra,
+                    Fecha = d.fechaHoraTransaccion,
+                    CodigoTransaccion = d.codigoTransaccion
+                })
+                .ToListAsync();
+
+            var fechaGeneracion = DateTime.Now;
+            var model = new ReporteVentasPdfViewModel
+            {
+                FechaGeneracion = fechaGeneracion,
+                NombreArchivo = $"DetalleVentas_{fechaGeneracion:yyyyMMdd_HHmmss_fff}.pdf",
+                DesdeTexto = desde?.ToString("dd/MM/yyyy"),
+                HastaTexto = hasta?.ToString("dd/MM/yyyy"),
+                Cliente = cliente,
+                Videojuego = videojuego,
+                TotalTransacciones = ventas.Count,
+                TotalUnidadesVendidas = ventas.Sum(v => v.Cantidad),
+                IngresoTotal = ventas.Sum(v => v.Total),
+                Ventas = ventas
+            };
+
+            return new ViewAsPdf("ReporteVentasPdf", model)
+            {
+                FileName = model.NombreArchivo,
+                ContentDisposition = ContentDisposition.Attachment,
+                PageSize = Size.A4,
+                PageOrientation = Orientation.Landscape,
+                PageMargins = new Margins(10, 10, 10, 10),
+                CustomSwitches = "--enable-local-file-access"
+            };
+        }
+
+        [HttpGet]
+        [AdminAuthorize]
+        public async Task<IActionResult> ObtenerDatos(int? categoriaId)
+        {
+            var data = await ObtenerResumenCategoriasAsync(categoriaId);
+
+            return Json(data.Select(x => new
+            {
+                categoriaId = x.CategoriaId,
+                categoria = x.Categoria,
+                total = x.Total
+            }));
+        }
+
+        [HttpGet]
+        [AdminAuthorize]
+        public async Task<IActionResult> ObtenerIngresosPorCategoria()
+        {
+            var data = await _context.DetalleCompras
+                .AsNoTracking()
+                .Include(d => d.Compra)
+                .ThenInclude(c => c.VideoJuego)
+                .ThenInclude(v => v.Categoria)
+                .Where(d => d.Compra != null && d.Compra.VideoJuego != null && d.Compra.VideoJuego.Categoria != null)
+                .GroupBy(d => d.Compra.VideoJuego.Categoria!.Nombre)
+                .Select(g => new
+                {
+                    categoria = g.Key,
+                    total = g.Sum(d => d.total)
+                })
+                .OrderByDescending(x => x.total)
+                .ToListAsync();
+
+            return Json(data);
+        }
+
+        [HttpGet]
+        [AdminAuthorize]
+        public async Task<IActionResult> Usuarios(string? busqueda, int? roleId, DateTime? desde, DateTime? hasta)
+        {
+            var model = await CrearAdminUsuariosViewModelAsync(busqueda, roleId, desde, hasta);
+            return View(model);
+        }
+
+        [HttpGet]
+        [AdminAuthorize]
+        public async Task<IActionResult> UsuariosPdf(string? busqueda, int? roleId, DateTime? desde, DateTime? hasta)
+        {
+            busqueda = busqueda?.Trim();
+
+            var usuarios = await _context.Usuarios
+                .AsNoTracking()
+                .Include(u => u.Role)
+                .Where(u =>
+                    (string.IsNullOrWhiteSpace(busqueda) ||
+                     (u.Nombre != null && u.Nombre.Contains(busqueda)) ||
+                     (u.Email != null && u.Email.Contains(busqueda))) &&
+                    (!roleId.HasValue || u.RoleId == roleId.Value) &&
+                    (!desde.HasValue || u.FechaRegistro >= desde.Value.Date) &&
+                    (!hasta.HasValue || u.FechaRegistro < hasta.Value.Date.AddDays(1)))
+                .OrderBy(u => u.Nombre)
+                .ThenBy(u => u.Id)
+                .Select(u => new AdminUsuarioItemViewModel
+                {
+                    Id = u.Id,
+                    Nombre = u.Nombre,
+                    Email = u.Email,
+                    RoleId = u.RoleId,
+                    RolNombre = u.Role != null ? u.Role.Nombre : "Sin rol",
+                    FechaRegistro = u.FechaRegistro,
+                    EsUsuarioActual = false
+                })
+                .ToListAsync();
+
+            var rolFiltro = roleId.HasValue
+                ? await _context.Roles
+                    .AsNoTracking()
+                    .Where(r => r.Id == roleId.Value)
+                    .Select(r => r.Nombre)
+                    .FirstOrDefaultAsync()
+                : null;
+
+            var fechaGeneracion = DateTime.Now;
+            var model = new ReporteUsuariosPdfViewModel
+            {
+                FechaGeneracion = fechaGeneracion,
+                NombreArchivo = $"UsuariosRegistrados_{fechaGeneracion:yyyyMMdd_HHmmss_fff}.pdf",
+                Busqueda = busqueda ?? string.Empty,
+                RolFiltro = rolFiltro ?? "Todos",
+                DesdeTexto = desde?.ToString("dd/MM/yyyy"),
+                HastaTexto = hasta?.ToString("dd/MM/yyyy"),
+                TotalUsuarios = usuarios.Count,
+                ResumenRoles = usuarios
+                    .GroupBy(u => string.IsNullOrWhiteSpace(u.RolNombre) ? "Sin rol" : u.RolNombre)
+                    .Select(g => new ReporteUsuariosRolResumenViewModel
+                    {
+                        Rol = g.Key,
+                        Total = g.Count()
+                    })
+                    .OrderBy(r => r.Rol)
+                    .ToList(),
+                Usuarios = usuarios
+            };
+
+            return new ViewAsPdf("UsuariosPdf", model)
+            {
+                FileName = model.NombreArchivo,
+                ContentDisposition = ContentDisposition.Attachment,
+                PageSize = Size.A4,
+                PageOrientation = Orientation.Portrait,
+                PageMargins = new Margins(10, 10, 10, 10),
+                CustomSwitches = "--enable-local-file-access"
+            };
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AdminAuthorize]
+        public async Task<IActionResult> ActualizarUsuario(int id, string nombre, int roleId)
+        {
+            nombre = nombre?.Trim() ?? string.Empty;
+
+            if (string.IsNullOrWhiteSpace(nombre))
+            {
+                TempData["UsuariosError"] = "El nombre del usuario no puede estar vacio.";
+                return RedirectToAction(nameof(Usuarios));
+            }
+
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
+                return NotFound();
+
+            var rolExiste = await _context.Roles.AnyAsync(r => r.Id == roleId);
+            if (!rolExiste)
+            {
+                TempData["UsuariosError"] = "El rol seleccionado no existe.";
+                return RedirectToAction(nameof(Usuarios));
+            }
+
+            var usuarioActualId = HttpContext.Session.GetInt32("usuarioId");
+            if (usuarioActualId.HasValue && usuarioActualId.Value == id)
+            {
+                var adminRoleId = await _context.Roles
+                    .Where(r => r.Nombre == "Admin")
+                    .Select(r => r.Id)
+                    .FirstOrDefaultAsync();
+
+                if (adminRoleId != 0 && roleId != adminRoleId)
+                {
+                    TempData["UsuariosError"] = "No puedes cambiar tu propio rol de administrador desde esta pantalla.";
+                    return RedirectToAction(nameof(Usuarios));
+                }
+            }
+
+            usuario.Nombre = nombre;
+            usuario.RoleId = roleId;
+            await _context.SaveChangesAsync();
+
+            TempData["UsuariosMensaje"] = "Usuario actualizado correctamente.";
+            return RedirectToAction(nameof(Usuarios));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AdminAuthorize]
+        public async Task<IActionResult> EliminarUsuario(int id)
+        {
+            var usuarioActualId = HttpContext.Session.GetInt32("usuarioId");
+            if (usuarioActualId.HasValue && usuarioActualId.Value == id)
+            {
+                TempData["UsuariosError"] = "No puedes eliminar tu propio usuario administrador.";
+                return RedirectToAction(nameof(Usuarios));
+            }
+
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
+                return NotFound();
+
+            _context.Usuarios.Remove(usuario);
+            await _context.SaveChangesAsync();
+
+            TempData["UsuariosMensaje"] = "Usuario eliminado correctamente.";
+            return RedirectToAction(nameof(Usuarios));
+        }
+
+        [HttpGet]
+        [AdminAuthorize]
+        public async Task<IActionResult> ObtenerVentasPorFecha()
+        {
+            var data = await _context.DetalleCompras
+                .AsNoTracking()
+                .GroupBy(d => new
+                {
+                    d.fechaHoraTransaccion.Year,
+                    d.fechaHoraTransaccion.Month,
+                    d.fechaHoraTransaccion.Day
+                })
+                .Select(g => new
+                {
+                    g.Key.Year,
+                    g.Key.Month,
+                    g.Key.Day,
+                    total = g.Count()
+                })
+                .OrderBy(x => x.Year)
+                .ThenBy(x => x.Month)
+                .ThenBy(x => x.Day)
+                .ToListAsync();
+
+            return Json(data.Select(x => new
+            {
+                fecha = new DateTime(x.Year, x.Month, x.Day).ToString("dd/MM/yyyy"),
+                total = x.total
+            }));
+        }
+
+        [HttpGet]
+        [AdminAuthorize]
+        public async Task<IActionResult> ObtenerTopJuegosVendidos()
+        {
+            var data = await _context.DetalleCompras
+                .AsNoTracking()
+                .Include(d => d.Compra)
+                .ThenInclude(c => c.VideoJuego)
+                .GroupBy(d => d.Compra != null && d.Compra.VideoJuego != null ? d.Compra.VideoJuego.Titulo : d.VideoJuegosId)
+                .Select(g => new
+                {
+                    juego = g.Key,
+                    total = g.Sum(d => d.cantidad)
+                })
+                .OrderByDescending(x => x.total)
+                .Take(8)
+                .ToListAsync();
+
+            return Json(data);
+        }
+
+        [HttpGet]
+        [AdminAuthorize]
+        public async Task<IActionResult> DetalleVentas(DateTime? desde, DateTime? hasta, string? cliente, string? videojuego, int pagina = 1)
+        {
+            int paginador = 10;
+            cliente = cliente?.Trim();
+            videojuego = videojuego?.Trim();
+
+            try
+            {
+                var query = _context.DetalleCompras
+                    .AsNoTracking()
+                    .Include(d => d.Compra)
+                    .ThenInclude(c => c.Usuario)
+                    .Include(d => d.Compra)
+                    .ThenInclude(c => c.VideoJuego)
+                    .AsQueryable();
+
+                if (desde.HasValue)
+                {
+                    var fechaDesde = desde.Value.Date;
+                    query = query.Where(d => d.fechaHoraTransaccion >= fechaDesde);
+                }
+
+                if (hasta.HasValue)
+                {
+                    var fechaHastaExclusiva = hasta.Value.Date.AddDays(1);
+                    query = query.Where(d => d.fechaHoraTransaccion < fechaHastaExclusiva);
+                }
+
+                if (!string.IsNullOrWhiteSpace(cliente))
+                {
+                    query = query.Where(d =>
+                        d.Compra != null &&
+                        d.Compra.Usuario != null &&
+                        ((d.Compra.Usuario.Nombre != null && d.Compra.Usuario.Nombre.Contains(cliente)) ||
+                         (d.Compra.Usuario.Email != null && d.Compra.Usuario.Email.Contains(cliente))));
+                }
+
+                if (!string.IsNullOrWhiteSpace(videojuego))
+                {
+                    query = query.Where(d =>
+                        (d.Compra != null &&
+                         d.Compra.VideoJuego != null &&
+                         d.Compra.VideoJuego.Titulo != null &&
+                         d.Compra.VideoJuego.Titulo.Contains(videojuego)) ||
+                        (d.VideoJuegosId != null && d.VideoJuegosId.Contains(videojuego)));
+                }
+
+                var totalregistros = await query.CountAsync();
+
+                var datos = await query
+                    .OrderByDescending(d => d.fechaHoraTransaccion)
+                    .Skip((pagina - 1) * paginador)
+                    .Take(paginador)
+                    .Select(d => new VentaViewModel
+                    {
+                        idCompra = d.idCompra,
+                        UsuarioId = d.Compra != null ? d.Compra.UsuarioID : 0,
+                        UsuarioNombre = d.Compra != null && d.Compra.Usuario != null ? d.Compra.Usuario.Nombre : null,
+                        UsuarioEmail = d.Compra != null && d.Compra.Usuario != null ? d.Compra.Usuario.Email : null,
+                        VideoJuegoID = d.Compra != null ? d.Compra.VideoJuegoID : (int?)null,
+                        VideoJuegoTitulo = d.Compra != null && d.Compra.VideoJuego != null ? d.Compra.VideoJuego.Titulo : null,
+                        VideoJuegosId = d.VideoJuegosId,
+                        cantidad = d.cantidad,
+                        total = d.total,
+                        estadoCompra = d.estadoCompra,
+                        fechaHoraTransaccion = d.fechaHoraTransaccion,
+                        codigoTransaccion = d.codigoTransaccion
+                    })
+                    .ToListAsync();
+
+                ViewBag.TotalPaginas = (int)Math.Ceiling((double)totalregistros / paginador);
+                ViewBag.PaginaActual = pagina;
+                ViewBag.Desde = desde;
+                ViewBag.Hasta = hasta;
+                ViewBag.Cliente = cliente;
+                ViewBag.Videojuego = videojuego;
+
+                return View(datos);
+            }
+            catch (Microsoft.Data.SqlClient.SqlException ex) when (ex.Message != null && ex.Message.Contains("detalle_compra"))
+            {
+                ViewBag.Error = "No se pudo consultar la tabla 'detalle_compra'. Verifica que exista en la base de datos y que la cadena de conexión apunte a la BD correcta.";
+                ViewBag.TotalPaginas = 1;
+                ViewBag.PaginaActual = 1;
+                ViewBag.Desde = desde;
+                ViewBag.Hasta = hasta;
+                ViewBag.Cliente = cliente;
+                ViewBag.Videojuego = videojuego;
+                return View(Enumerable.Empty<VentaViewModel>());
+            }
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        [SessionAuthorize]
+        public async Task<IActionResult> MisCompras(DateTime? desde, DateTime? hasta, string? juego)
+        {
+            var usuarioId = HttpContext.Session.GetInt32("usuarioId");
+            if (!usuarioId.HasValue)
+                return RedirectToAction(nameof(Index));
+
+            juego = juego?.Trim();
+
+            var query = _context.DetalleCompras
+                .AsNoTracking()
+                .Include(d => d.Compra)
+                .ThenInclude(c => c.VideoJuego)
+                .Where(d => d.Compra.UsuarioID == usuarioId.Value)
+                .AsQueryable();
+
+            if (desde.HasValue)
+            {
+                var fechaDesde = desde.Value.Date;
+                query = query.Where(d => d.fechaHoraTransaccion >= fechaDesde);
+            }
+
+            if (hasta.HasValue)
+            {
+                var fechaHastaExclusiva = hasta.Value.Date.AddDays(1);
+                query = query.Where(d => d.fechaHoraTransaccion < fechaHastaExclusiva);
+            }
+
+            if (!string.IsNullOrWhiteSpace(juego))
+            {
+                query = query.Where(d =>
+                    (d.Compra.VideoJuego != null &&
+                     d.Compra.VideoJuego.Titulo != null &&
+                     d.Compra.VideoJuego.Titulo.Contains(juego)) ||
+                    (d.VideoJuegosId != null && d.VideoJuegosId.Contains(juego)));
+            }
+
+            var compras = await query
+                .OrderByDescending(d => d.fechaHoraTransaccion)
+                .Select(d => new CompraUsuarioViewModel
+                {
+                    CompraId = d.idCompra,
+                    Juego = d.Compra.VideoJuego != null ? d.Compra.VideoJuego.Titulo : d.VideoJuegosId,
+                    Cantidad = d.cantidad,
+                    Total = d.total,
+                    Estado = d.estadoCompra,
+                    Fecha = d.fechaHoraTransaccion,
+                    CodigoTransaccion = d.codigoTransaccion
+                })
+                .ToListAsync();
+
+            for (int i = 0; i < compras.Count; i++)
+            {
+                compras[i].Numero = i + 1;
+            }
+
+            ViewBag.Desde = desde;
+            ViewBag.Hasta = hasta;
+            ViewBag.Juego = juego;
+
+            return View(compras);
+        }
+
+        [HttpGet]
+        [SessionAuthorize]
+        public async Task<IActionResult> MisComprasPdf(DateTime? desde, DateTime? hasta, string? juego)
+        {
+            var usuarioId = HttpContext.Session.GetInt32("usuarioId");
+            if (!usuarioId.HasValue)
+                return RedirectToAction(nameof(Index));
+
+            var usuario = await _context.Usuarios
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Id == usuarioId.Value);
+            if (usuario == null)
+                return RedirectToAction(nameof(Logout));
+
+            juego = juego?.Trim();
+
+            var query = _context.DetalleCompras
+                .AsNoTracking()
+                .Include(d => d.Compra)
+                .ThenInclude(c => c.VideoJuego)
+                .Where(d => d.Compra.UsuarioID == usuarioId.Value)
+                .AsQueryable();
+
+            if (desde.HasValue)
+            {
+                var fechaDesde = desde.Value.Date;
+                query = query.Where(d => d.fechaHoraTransaccion >= fechaDesde);
+            }
+
+            if (hasta.HasValue)
+            {
+                var fechaHastaExclusiva = hasta.Value.Date.AddDays(1);
+                query = query.Where(d => d.fechaHoraTransaccion < fechaHastaExclusiva);
+            }
+
+            if (!string.IsNullOrWhiteSpace(juego))
+            {
+                query = query.Where(d =>
+                    (d.Compra.VideoJuego != null &&
+                     d.Compra.VideoJuego.Titulo != null &&
+                     d.Compra.VideoJuego.Titulo.Contains(juego)) ||
+                    (d.VideoJuegosId != null && d.VideoJuegosId.Contains(juego)));
+            }
+
+            var compras = await query
+                .OrderByDescending(d => d.fechaHoraTransaccion)
+                .Select(d => new CompraUsuarioViewModel
+                {
+                    CompraId = d.idCompra,
+                    Juego = d.Compra.VideoJuego != null ? d.Compra.VideoJuego.Titulo : d.VideoJuegosId,
+                    Cantidad = d.cantidad,
+                    Total = d.total,
+                    Estado = d.estadoCompra,
+                    Fecha = d.fechaHoraTransaccion,
+                    CodigoTransaccion = d.codigoTransaccion
+                })
+                .ToListAsync();
+
+            for (int i = 0; i < compras.Count; i++)
+            {
+                compras[i].Numero = i + 1;
+            }
+
+            var fechaGeneracion = DateTime.Now;
+            var model = new ReporteComprasUsuarioPdfViewModel
+            {
+                FechaGeneracion = fechaGeneracion,
+                NombreArchivo = $"MisVideojuegosComprados_{fechaGeneracion:yyyyMMdd_HHmmss_fff}.pdf",
+                UsuarioNombre = usuario.Nombre,
+                UsuarioEmail = usuario.Email,
+                DesdeTexto = desde?.ToString("dd/MM/yyyy"),
+                HastaTexto = hasta?.ToString("dd/MM/yyyy"),
+                Juego = juego,
+                TotalCompras = compras.Count,
+                TotalUnidades = compras.Sum(c => c.Cantidad),
+                TotalInvertido = compras.Sum(c => c.Total),
+                Compras = compras
+            };
+
+            return new ViewAsPdf("MisComprasPdf", model)
+            {
+                FileName = model.NombreArchivo,
+                ContentDisposition = ContentDisposition.Attachment,
+                PageSize = Size.A4,
+                PageOrientation = Orientation.Landscape,
+                PageMargins = new Margins(10, 10, 10, 10),
+                CustomSwitches = "--enable-local-file-access"
+            };
+        }
+
+        [HttpGet]
+        [SessionAuthorize]
+        public async Task<IActionResult> MiCuenta()
+        {
+            var usuarioId = HttpContext.Session.GetInt32("usuarioId");
+            if (!usuarioId.HasValue)
+                return RedirectToAction(nameof(Index));
+
+            var usuario = await _context.Usuarios
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Id == usuarioId.Value);
+            if (usuario == null)
+                return RedirectToAction(nameof(Logout));
+
+            var model = new GestionCuentaViewModel
+            {
+                Nombre = usuario.Nombre,
+                Email = usuario.Email
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [SessionAuthorize]
+        public async Task<IActionResult> MiCuenta(GestionCuentaViewModel model)
+        {
+            var usuarioId = HttpContext.Session.GetInt32("usuarioId");
+            if (!usuarioId.HasValue)
+                return RedirectToAction(nameof(Index));
+
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == usuarioId.Value);
+            if (usuario == null)
+                return RedirectToAction(nameof(Logout));
+
+            model.Nombre = model.Nombre?.Trim() ?? string.Empty;
+            model.Email = usuario.Email;
+
+            if (string.IsNullOrWhiteSpace(model.Nombre))
+                ModelState.AddModelError(nameof(model.Nombre), "El nombre es obligatorio.");
+
+            var quiereCambiarPassword =
+                !string.IsNullOrWhiteSpace(model.CurrentPassword) ||
+                !string.IsNullOrWhiteSpace(model.NewPassword) ||
+                !string.IsNullOrWhiteSpace(model.ConfirmNewPassword);
+
+            if (quiereCambiarPassword)
+            {
+                if (string.IsNullOrWhiteSpace(model.CurrentPassword))
+                    ModelState.AddModelError(nameof(model.CurrentPassword), "Debes ingresar tu contrasena actual.");
+
+                if (string.IsNullOrWhiteSpace(model.NewPassword))
+                    ModelState.AddModelError(nameof(model.NewPassword), "Debes ingresar una nueva contrasena.");
+
+                if (!VerificarPassword(usuario, model.CurrentPassword))
+                    ModelState.AddModelError(nameof(model.CurrentPassword), "La contrasena actual no es correcta.");
+            }
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            usuario.Nombre = model.Nombre;
+
+            if (quiereCambiarPassword)
+            {
+                var salt = Convert.ToBase64String(RandomNumberGenerator.GetBytes(16));
+                usuario.Salt = salt;
+                usuario.Password = HashPasswordUtf8(salt + model.NewPassword);
+            }
+
+            await _context.SaveChangesAsync();
+            HttpContext.Session.SetString("usuario", usuario.Nombre);
+
+            TempData["CuentaMensaje"] = quiereCambiarPassword
+                ? "Tu cuenta y contrasena fueron actualizadas correctamente."
+                : "Tu nombre fue actualizado correctamente.";
+
+            return RedirectToAction(nameof(MiCuenta));
+        }
+
+        private int GetOrCreateRoleId(string nombre)
+        {
+            var role = _context.Roles.FirstOrDefault(r => r.Nombre == nombre);
+            if (role != null)
+                return role.Id;
+
+            role = new Role { Nombre = nombre };
+            _context.Roles.Add(role);
+            _context.SaveChanges();
+            return role.Id;
+        }
+
+        private static bool VerificarPassword(Usuario usuario, string passwordIngresada)
+        {
+            if (string.IsNullOrWhiteSpace(passwordIngresada))
+                return false;
+
+            var saltedPassword = usuario.Salt + passwordIngresada;
+            var hashUnicode = HashPasswordUnicode(saltedPassword);
+            var hashUtf8 = HashPasswordUtf8(saltedPassword);
+
+            return hashUnicode.SequenceEqual(usuario.Password) || hashUtf8.SequenceEqual(usuario.Password);
+        }
+
+        private static byte[] HashPasswordUnicode(string value)
+        {
+            using SHA256 sha256 = SHA256.Create();
+            return sha256.ComputeHash(Encoding.Unicode.GetBytes(value));
+        }
+
+        private static byte[] HashPasswordUtf8(string value)
+        {
+            using SHA256 sha256 = SHA256.Create();
+            return sha256.ComputeHash(Encoding.UTF8.GetBytes(value));
+        }
+
+        private async Task<AdminUsuariosViewModel> CrearAdminUsuariosViewModelAsync(string? busqueda = null, int? roleId = null, DateTime? desde = null, DateTime? hasta = null)
+        {
+            var usuarioActualId = HttpContext.Session.GetInt32("usuarioId");
+            busqueda = busqueda?.Trim();
+
+            var query = _context.Usuarios
+                .AsNoTracking()
+                .Include(u => u.Role)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(busqueda))
+            {
+                query = query.Where(u =>
+                    (u.Nombre != null && u.Nombre.Contains(busqueda)) ||
+                    (u.Email != null && u.Email.Contains(busqueda)));
+            }
+
+            if (roleId.HasValue)
+            {
+                query = query.Where(u => u.RoleId == roleId.Value);
+            }
+
+            if (desde.HasValue)
+            {
+                var fechaDesde = desde.Value.Date;
+                query = query.Where(u => u.FechaRegistro >= fechaDesde);
+            }
+
+            if (hasta.HasValue)
+            {
+                var fechaHastaExclusiva = hasta.Value.Date.AddDays(1);
+                query = query.Where(u => u.FechaRegistro < fechaHastaExclusiva);
+            }
+
+            var usuarios = await query
+                .OrderBy(u => u.Nombre)
+                .ThenBy(u => u.Id)
+                .Select(u => new AdminUsuarioItemViewModel
+                {
+                    Id = u.Id,
+                    Nombre = u.Nombre,
+                    Email = u.Email,
+                    RoleId = u.RoleId,
+                    RolNombre = u.Role != null ? u.Role.Nombre : string.Empty,
+                    FechaRegistro = u.FechaRegistro,
+                    EsUsuarioActual = usuarioActualId.HasValue && u.Id == usuarioActualId.Value
+                })
+                .ToListAsync();
+
+            var roles = await _context.Roles
+                .AsNoTracking()
+                .OrderBy(r => r.Nombre)
+                .ThenBy(r => r.Id)
+                .Select(r => new SelectListItem
+                {
+                    Value = r.Id.ToString(),
+                    Text = r.Nombre
+                })
+                .ToListAsync();
+
+            return new AdminUsuariosViewModel
+            {
+                Busqueda = busqueda ?? string.Empty,
+                RoleIdFiltro = roleId,
+                Desde = desde,
+                Hasta = hasta,
+                Usuarios = usuarios,
+                RolesDisponibles = roles
+            };
+        }
+
+        private async Task<List<DashboardCategoriaViewModel>> ObtenerResumenCategoriasAsync(int? categoriaId = null)
+        {
+            var query = _context.Categorias
+                .AsNoTracking()
+                .Select(c => new DashboardCategoriaViewModel
+                {
+                    CategoriaId = c.Id,
+                    Categoria = c.Nombre,
+                    Total = c.VideoJuegos.Count()
+                });
+
+            if (categoriaId.HasValue)
+            {
+                query = query.Where(c => c.CategoriaId == categoriaId.Value);
+            }
+
+            return await query
+                .OrderBy(c => c.Categoria)
+                .ThenBy(c => c.CategoriaId)
+                .ToListAsync();
+        }
+    }
+}

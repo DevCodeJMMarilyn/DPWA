@@ -1,0 +1,152 @@
+@model appweb2.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    var usuario = Context.Session.GetString("usuario");
+}
+
+<!-- Stats header bar -->
+<div class="arcade-page-header mb-4">
+    <div>
+        <h2 class="arcade-page-title"><i class="fas fa-chart-bar me-2"></i>Dashboard</h2>
+        <p class="arcade-page-sub">Panel de administración · Bienvenido, <span class="text-neon">@usuario</span> 👾</p>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+        <a asp-controller="VideoJuegos" asp-action="Create" class="btn-arcade-sm btn-arcade-gold">
+            <i class="fas fa-plus me-1"></i>Nuevo juego
+        </a>
+        <a asp-controller="VideoJuegos" asp-action="GestionCategorias" class="btn-arcade-sm btn-arcade-outline">
+            <i class="fas fa-tags me-1"></i>Categorías
+        </a>
+        <a asp-controller="Account" asp-action="Logout" class="btn-arcade-sm btn-arcade-danger">
+            <i class="fas fa-sign-out-alt me-1"></i>Salir
+        </a>
+    </div>
+</div>
+
+<!-- Chart section -->
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="arcade-panel">
+            <div class="arcade-panel-header">
+                <i class="fas fa-chart-column me-2"></i>Videojuegos por categoría
+            </div>
+            <div class="arcade-panel-body">
+                <div class="mb-3">
+                    <label class="arcade-label"><i class="fas fa-filter me-1"></i>Filtrar por categoría</label>
+                    <select id="filtroCategoria" class="form-control arcade-input" style="max-width: 300px;">
+                        <option value="">Todas las categorías</option>
+                        @foreach (var categoria in Model.Categorias)
+                        {
+                            <option value="@categoria.CategoriaId">@categoria.Categoria</option>
+                        }
+                    </select>
+                </div>
+                <div id="container" style="min-height: 320px; border-radius: 12px; overflow: hidden;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="arcade-panel h-100">
+            <div class="arcade-panel-header">
+                <i class="fas fa-info-circle me-2"></i>Accesos rápidos
+            </div>
+            <div class="arcade-panel-body d-flex flex-column gap-3">
+                <a asp-controller="VideoJuegos" asp-action="Index" class="arcade-quick-link">
+                    <i class="fas fa-gamepad"></i>
+                    <div>
+                        <div class="fw-bold">Catálogo de juegos</div>
+                        <div class="small text-muted">Ver todos los videojuegos</div>
+                    </div>
+                </a>
+                <a asp-controller="VideoJuegos" asp-action="Create" class="arcade-quick-link">
+                    <i class="fas fa-plus-circle"></i>
+                    <div>
+                        <div class="fw-bold">Agregar videojuego</div>
+                        <div class="small text-muted">Publicar un nuevo juego</div>
+                    </div>
+                </a>
+                <a asp-controller="VideoJuegos" asp-action="GestionCategorias" class="arcade-quick-link">
+                    <i class="fas fa-tags"></i>
+                    <div>
+                        <div class="fw-bold">Gestionar categorías</div>
+                        <div class="small text-muted">Crear, editar o eliminar</div>
+                    </div>
+                </a>
+                <a asp-controller="Account" asp-action="Logout" class="arcade-quick-link arcade-quick-danger">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <div>
+                        <div class="fw-bold">Cerrar sesión</div>
+                        <div class="small text-muted">Salir del sistema</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function cargarGrafica(categoriaId) {
+            $.get('@Url.Action("ObtenerDatos", "Account")', { categoriaId: categoriaId }, function (data) {
+                var categorias = data.map(x => x.categoria);
+                var totales   = data.map(x => x.total);
+
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'column',
+                        backgroundColor: '#1a0a3e',
+                        borderRadius: 12,
+                        style: { fontFamily: "'Rajdhani', sans-serif" }
+                    },
+                    title: {
+                        text: 'Juegos por categoría',
+                        style: { color: '#c084fc', fontFamily: "'Orbitron', monospace", fontSize: '14px' }
+                    },
+                    xAxis: {
+                        categories: categorias,
+                        labels: { style: { color: '#a78bca' } },
+                        lineColor: 'rgba(124,58,237,0.3)',
+                        gridLineColor: 'rgba(124,58,237,0.1)'
+                    },
+                    yAxis: {
+                        allowDecimals: false,
+                        min: 0,
+                        title: { text: 'Cantidad', style: { color: '#a78bca' } },
+                        labels: { style: { color: '#a78bca' } },
+                        gridLineColor: 'rgba(124,58,237,0.15)'
+                    },
+                    legend: { itemStyle: { color: '#a78bca' } },
+                    plotOptions: {
+                        column: {
+                            borderRadius: 6,
+                            colorByPoint: false
+                        }
+                    },
+                    series: [{
+                        name: 'Juegos',
+                        data: totales,
+                        color: {
+                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                            stops: [
+                                [0, '#c084fc'],
+                                [1, '#2563eb']
+                            ]
+                        }
+                    }],
+                    credits: { enabled: false }
+                });
+            });
+        }
+
+        cargarGrafica('');
+        $('#filtroCategoria').change(function () {
+            cargarGrafica($(this).val());
+        });
+    </script>
+}

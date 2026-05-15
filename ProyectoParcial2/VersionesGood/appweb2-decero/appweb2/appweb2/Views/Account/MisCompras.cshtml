@@ -1,0 +1,63 @@
+@model IEnumerable<appweb2.Models.CompraUsuarioViewModel>
+
+@{
+    ViewData["Title"] = "Mis compras";
+}
+
+<div class="container mt-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <h2 class="mb-1">Mis compras</h2>
+            <p class="text-muted mb-0">Aqui puedes ver todas las compras realizadas con tu cuenta actual.</p>
+        </div>
+        <div class="d-flex gap-2">
+            <a asp-controller="VideoJuegos" asp-action="Carrito" class="btn btn-outline-primary">Ver carrito</a>
+            <a asp-controller="VideoJuegos" asp-action="Index" class="btn btn-outline-secondary">Seguir comprando</a>
+        </div>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="card shadow-sm border-0">
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Compra</th>
+                            <th>Juego</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th>Codigo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>#@item.CompraId</td>
+                                <td>@item.Juego</td>
+                                <td>@item.Cantidad</td>
+                                <td>$@item.Total</td>
+                                <td><span class="badge text-bg-success">@item.Estado</span></td>
+                                <td>@item.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>@item.CodigoTransaccion</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center py-5">
+                <h3 class="h5">Todavia no tienes compras registradas</h3>
+                <p class="text-muted">Cuando completes una compra con Povy Sandbox, aparecera aqui.</p>
+                <a asp-controller="VideoJuegos" asp-action="Index" class="btn btn-warning">Ir al catalogo</a>
+            </div>
+        </div>
+    }
+</div>

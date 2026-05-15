@@ -1,0 +1,71 @@
+@model IEnumerable<appweb2.Models.CompraUsuarioViewModel>
+
+@{
+    ViewData["Title"] = "Mis compras";
+}
+
+<div class="arcade-page-header mb-4">
+    <div>
+        <h2 class="arcade-page-title"><i class="fas fa-bag-shopping me-2"></i>Mis compras</h2>
+        <p class="arcade-page-sub">Historial de todas tus compras realizadas.</p>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+        <a asp-controller="VideoJuegos" asp-action="Carrito" class="btn-arcade-sm btn-arcade-outline">
+            <i class="fas fa-cart-shopping me-1"></i>Ver carrito
+        </a>
+        <a asp-controller="VideoJuegos" asp-action="Index" class="btn-arcade-sm btn-arcade-gold">
+            <i class="fas fa-gamepad me-1"></i>Seguir comprando
+        </a>
+    </div>
+</div>
+
+@if (Model.Any())
+{
+    <div class="arcade-panel">
+        <div class="arcade-panel-header">
+            <i class="fas fa-receipt me-2"></i>Historial de compras
+        </div>
+        <div class="arcade-panel-body p-0">
+            <div class="table-responsive">
+                <table class="arcade-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Juego</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th>Código</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Numero</td>
+                                <td><span class="fw-bold">@item.Juego</span></td>
+                                <td>@item.Cantidad</td>
+                                <td><span class="price" style="font-size:1rem;">$@item.Total</span></td>
+                                <td><span class="arcade-badge-success">@item.Estado</span></td>
+                                <td>@item.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td><code class="arcade-code">@item.CodigoTransaccion</code></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="arcade-empty-state">
+        <i class="fas fa-bag-shopping"></i>
+        <h3>No tienes compras registradas</h3>
+        <p>Cuando completes una compra, aparecerá aquí.</p>
+        <a asp-controller="VideoJuegos" asp-action="Index" class="btn-arcade-primary mt-2">
+            <i class="fas fa-gamepad me-2"></i>Ir al catálogo
+        </a>
+    </div>
+}

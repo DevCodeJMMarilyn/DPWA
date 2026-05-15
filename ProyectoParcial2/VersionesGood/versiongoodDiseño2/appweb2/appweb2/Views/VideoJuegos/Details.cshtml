@@ -1,0 +1,88 @@
+@model appweb2.Models.VideoJuego
+
+@{
+    ViewData["Title"] = Model.Titulo;
+    var esAdmin = string.Equals(Context.Session.GetString("rol"), "Admin", StringComparison.OrdinalIgnoreCase);
+}
+
+<div class="arcade-page-header mb-4">
+    <h2 class="arcade-page-title"><i class="fas fa-info-circle me-2"></i>Detalle del juego</h2>
+    <a asp-action="Index" class="btn-arcade-sm btn-arcade-outline">
+        <i class="fas fa-arrow-left me-1"></i>Volver
+    </a>
+</div>
+
+<div class="arcade-panel">
+    <div class="arcade-panel-body">
+        <div class="row g-4">
+            <div class="col-md-4 text-center">
+                @if (!string.IsNullOrWhiteSpace(Model.Imagen))
+                {
+                    <img src="@Model.Imagen" class="img-fluid rounded-3 details-cover" alt="Portada de @Model.Titulo" />
+                }
+                <!-- Botones acción -->
+                <div class="d-flex flex-column gap-2 mt-4">
+                    @if (!string.IsNullOrWhiteSpace(Context.Session.GetString("usuario")))
+                    {
+                        <form asp-action="AgregarAlCarrito" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <input type="hidden" name="cantidad" value="1" />
+                            <input type="hidden" name="irAlCarrito" value="true" />
+                            <button type="submit" class="btn-arcade-primary w-100">
+                                <i class="fas fa-bolt me-2"></i>Comprar ahora
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Index" class="btn-arcade-primary text-center">
+                            <i class="fas fa-sign-in-alt me-2"></i>Inicia sesión para comprar
+                        </a>
+                    }
+                    @if (esAdmin)
+                    {
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-arcade-sm btn-arcade-gold text-center">
+                            <i class="fas fa-edit me-1"></i>Editar
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn-arcade-sm btn-arcade-danger text-center">
+                            <i class="fas fa-trash me-1"></i>Eliminar
+                        </a>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <h1 class="details-title">@Model.Titulo</h1>
+
+                <div class="details-badges mb-3">
+                    @if (Model.Categoria != null)
+                    {
+                        <span class="details-badge-cat"><i class="fas fa-gamepad me-1"></i>@Model.Categoria.Nombre</span>
+                    }
+                    <span class="details-badge-age">+@Model.EdadMinima años</span>
+                    @if (Model.EnPromocion)
+                    {
+                        <span class="details-badge-promo"><i class="fas fa-fire me-1"></i>Promoción</span>
+                    }
+                </div>
+
+                <div class="details-price mb-3">
+                    @if (Model.EnPromocion && Model.PrecioPromocion.HasValue)
+                    {
+                        <span class="price-now">$@Model.PrecioPromocion</span>
+                        <span class="price-old">$@Model.Precio</span>
+                        <span class="price-save">Ahorras $@(Model.Precio - Model.PrecioPromocion.Value)</span>
+                    }
+                    else
+                    {
+                        <span class="price-now">$@Model.Precio</span>
+                    }
+                </div>
+
+                <div class="details-desc-label">Descripción</div>
+                <p class="details-desc">@Model.Descripcion</p>
+            </div>
+        </div>
+    </div>
+</div>

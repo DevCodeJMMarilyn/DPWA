@@ -1,0 +1,368 @@
+@model appweb2.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    var usuario = Context.Session.GetString("usuario");
+}
+
+<div class="arcade-page-header mb-4">
+    <div>
+        <h2 class="arcade-page-title"><i class="fas fa-chart-bar me-2"></i>Dashboard</h2>
+        <p class="arcade-page-sub">Panel de administracion - Bienvenido, <span class="text-neon">@usuario</span></p>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+        <a asp-controller="VideoJuegos" asp-action="Create" class="btn-arcade-sm btn-arcade-gold">
+            <i class="fas fa-plus me-1"></i>Nuevo juego
+        </a>
+        <a asp-controller="VideoJuegos" asp-action="GestionCategorias" class="btn-arcade-sm btn-arcade-outline">
+            <i class="fas fa-tags me-1"></i>Categorias
+        </a>
+        <a asp-controller="Account" asp-action="Logout" class="btn-arcade-sm btn-arcade-danger">
+            <i class="fas fa-sign-out-alt me-1"></i>Salir
+        </a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="arcade-panel">
+            <div class="arcade-panel-header">
+                <i class="fas fa-chart-column me-2"></i>Videojuegos por categoria
+            </div>
+            <div class="arcade-panel-body">
+                <div class="mb-3">
+                    <label class="arcade-label"><i class="fas fa-filter me-1"></i>Filtrar por categoria</label>
+                    <select id="filtroCategoria" class="form-control arcade-input" style="max-width: 300px;">
+                        <option value="">Todas las categorias</option>
+                        @foreach (var categoria in Model.Categorias)
+                        {
+                            <option value="@categoria.CategoriaId">@categoria.Categoria</option>
+                        }
+                    </select>
+                </div>
+                <div id="container" class="dashboard-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="arcade-panel h-100">
+            <div class="arcade-panel-header">
+                <i class="fas fa-info-circle me-2"></i>Accesos rapidos
+            </div>
+            <div class="arcade-panel-body d-flex flex-column gap-3">
+                <a asp-controller="VideoJuegos" asp-action="Index" class="arcade-quick-link">
+                    <i class="fas fa-gamepad"></i>
+                    <div>
+                        <div class="fw-bold">Catalogo de juegos</div>
+                        <div class="small text-muted">Ver todos los videojuegos</div>
+                    </div>
+                </a>
+                <a asp-controller="VideoJuegos" asp-action="Create" class="arcade-quick-link">
+                    <i class="fas fa-plus-circle"></i>
+                    <div>
+                        <div class="fw-bold">Agregar videojuego</div>
+                        <div class="small text-muted">Publicar un nuevo juego</div>
+                    </div>
+                </a>
+                <a asp-controller="VideoJuegos" asp-action="GestionCategorias" class="arcade-quick-link">
+                    <i class="fas fa-tags"></i>
+                    <div>
+                        <div class="fw-bold">Gestionar categorias</div>
+                        <div class="small text-muted">Crear, editar o eliminar</div>
+                    </div>
+                </a>
+                <a asp-controller="Account" asp-action="DetalleVentas" class="arcade-quick-link">
+                    <i class="fas fa-receipt"></i>
+                    <div>
+                        <div class="fw-bold">Detalle de ventas</div>
+                        <div class="small text-muted">Consultar transacciones</div>
+                    </div>
+                </a>
+                <a asp-controller="Account" asp-action="Usuarios" class="arcade-quick-link">
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <div class="fw-bold">Usuarios registrados</div>
+                        <div class="small text-muted">Administrar cuentas</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="arcade-panel h-100">
+            <div class="arcade-panel-header">
+                <i class="fas fa-chart-pie me-2"></i>Distribucion por categoria
+            </div>
+            <div class="arcade-panel-body">
+                <div id="graficaDistribucion" class="dashboard-chart dashboard-chart-sm"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="arcade-panel h-100">
+            <div class="arcade-panel-header">
+                <i class="fas fa-dollar-sign me-2"></i>Ingresos por categoria
+            </div>
+            <div class="arcade-panel-body">
+                <div id="graficaIngresos" class="dashboard-chart dashboard-chart-sm"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="arcade-panel h-100">
+            <div class="arcade-panel-header">
+                <i class="fas fa-trophy me-2"></i>Top juegos vendidos
+            </div>
+            <div class="arcade-panel-body">
+                <div id="graficaTopJuegos" class="dashboard-chart dashboard-chart-sm"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="arcade-panel">
+            <div class="arcade-panel-header">
+                <i class="fas fa-chart-line me-2"></i>Ventas por fecha
+            </div>
+            <div class="arcade-panel-body">
+                <div id="graficaVentasFecha" class="dashboard-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const chartTheme = {
+            backgroundColor: '#1a0a3e',
+            borderRadius: 12,
+            style: { fontFamily: "'Rajdhani', sans-serif" }
+        };
+
+        const titleStyle = {
+            color: '#c084fc',
+            fontFamily: "'Orbitron', monospace",
+            fontSize: '14px'
+        };
+
+        const labelStyle = { color: '#a78bca' };
+        const gridColor = 'rgba(124,58,237,0.15)';
+
+        function mostrarSinDatos(containerId, titulo) {
+            Highcharts.chart(containerId, {
+                chart: chartTheme,
+                title: { text: titulo, style: titleStyle },
+                subtitle: { text: 'Sin datos disponibles', style: labelStyle },
+                series: [],
+                credits: { enabled: false }
+            });
+        }
+
+        function cargarGrafica(categoriaId) {
+            $.get('@Url.Action("ObtenerDatos", "Account")', { categoriaId: categoriaId }, function (data) {
+                const categorias = data.map(x => x.categoria);
+                const totales = data.map(x => x.total);
+
+                if (!totales.length) {
+                    mostrarSinDatos('container', 'Juegos por categoria');
+                    return;
+                }
+
+                Highcharts.chart('container', {
+                    chart: { ...chartTheme, type: 'column' },
+                    title: { text: 'Juegos por categoria', style: titleStyle },
+                    xAxis: {
+                        categories: categorias,
+                        labels: { style: labelStyle },
+                        lineColor: 'rgba(124,58,237,0.3)'
+                    },
+                    yAxis: {
+                        allowDecimals: false,
+                        min: 0,
+                        title: { text: 'Cantidad', style: labelStyle },
+                        labels: { style: labelStyle },
+                        gridLineColor: gridColor
+                    },
+                    legend: { enabled: false },
+                    plotOptions: {
+                        column: { borderRadius: 6 }
+                    },
+                    series: [{
+                        name: 'Juegos',
+                        data: totales,
+                        color: {
+                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                            stops: [[0, '#c084fc'], [1, '#2563eb']]
+                        }
+                    }],
+                    credits: { enabled: false }
+                });
+            });
+        }
+
+        function cargarDistribucionCategorias() {
+            $.get('@Url.Action("ObtenerDatos", "Account")', function (data) {
+                const puntos = data.map(x => ({ name: x.categoria, y: x.total }));
+
+                if (!puntos.length) {
+                    mostrarSinDatos('graficaDistribucion', 'Distribucion por categoria');
+                    return;
+                }
+
+                Highcharts.chart('graficaDistribucion', {
+                    chart: { ...chartTheme, type: 'pie' },
+                    title: { text: 'Catalogo', style: titleStyle },
+                    tooltip: { pointFormat: '<b>{point.y}</b> juegos ({point.percentage:.1f}%)' },
+                    plotOptions: {
+                        pie: {
+                            borderWidth: 0,
+                            dataLabels: {
+                                enabled: true,
+                                style: { color: '#f0e6ff', textOutline: 'none' }
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Juegos',
+                        data: puntos
+                    }],
+                    credits: { enabled: false }
+                });
+            });
+        }
+
+        function cargarIngresosCategorias() {
+            $.get('@Url.Action("ObtenerIngresosPorCategoria", "Account")', function (data) {
+                const categorias = data.map(x => x.categoria);
+                const totales = data.map(x => Number(x.total));
+
+                if (!totales.length) {
+                    mostrarSinDatos('graficaIngresos', 'Ingresos por categoria');
+                    return;
+                }
+
+                Highcharts.chart('graficaIngresos', {
+                    chart: { ...chartTheme, type: 'bar' },
+                    title: { text: 'Ingresos', style: titleStyle },
+                    xAxis: {
+                        categories: categorias,
+                        labels: { style: labelStyle },
+                        lineColor: 'rgba(124,58,237,0.3)'
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: { text: 'USD', style: labelStyle },
+                        labels: { style: labelStyle },
+                        gridLineColor: gridColor
+                    },
+                    legend: { enabled: false },
+                    tooltip: { pointFormat: '$<b>{point.y:.2f}</b>' },
+                    series: [{
+                        name: 'Ingresos',
+                        data: totales,
+                        color: '#fbbf24'
+                    }],
+                    credits: { enabled: false }
+                });
+            });
+        }
+
+        function cargarTopJuegos() {
+            $.get('@Url.Action("ObtenerTopJuegosVendidos", "Account")', function (data) {
+                const juegos = data.map(x => x.juego);
+                const totales = data.map(x => x.total);
+
+                if (!totales.length) {
+                    mostrarSinDatos('graficaTopJuegos', 'Top juegos vendidos');
+                    return;
+                }
+
+                Highcharts.chart('graficaTopJuegos', {
+                    chart: { ...chartTheme, type: 'bar' },
+                    title: { text: 'Mas vendidos', style: titleStyle },
+                    xAxis: {
+                        categories: juegos,
+                        labels: { style: labelStyle },
+                        lineColor: 'rgba(124,58,237,0.3)'
+                    },
+                    yAxis: {
+                        allowDecimals: false,
+                        min: 0,
+                        title: { text: 'Unidades', style: labelStyle },
+                        labels: { style: labelStyle },
+                        gridLineColor: gridColor
+                    },
+                    legend: { enabled: false },
+                    series: [{
+                        name: 'Unidades vendidas',
+                        data: totales,
+                        color: '#06b6d4'
+                    }],
+                    credits: { enabled: false }
+                });
+            });
+        }
+
+        function cargarVentasFecha() {
+            $.get('@Url.Action("ObtenerVentasPorFecha", "Account")', function (data) {
+                const fechas = data.map(x => x.fecha);
+                const totales = data.map(x => x.total);
+
+                if (!totales.length) {
+                    mostrarSinDatos('graficaVentasFecha', 'Ventas por fecha');
+                    return;
+                }
+
+                Highcharts.chart('graficaVentasFecha', {
+                    chart: { ...chartTheme, type: 'line' },
+                    title: { text: 'Ventas por fecha', style: titleStyle },
+                    xAxis: {
+                        categories: fechas,
+                        labels: { style: labelStyle },
+                        lineColor: 'rgba(124,58,237,0.3)'
+                    },
+                    yAxis: {
+                        allowDecimals: false,
+                        min: 0,
+                        title: { text: 'Ventas', style: labelStyle },
+                        labels: { style: labelStyle },
+                        gridLineColor: gridColor
+                    },
+                    legend: { enabled: false },
+                    plotOptions: {
+                        line: {
+                            marker: {
+                                enabled: true,
+                                radius: 5
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Ventas',
+                        data: totales,
+                        color: '#ec4899'
+                    }],
+                    credits: { enabled: false }
+                });
+            });
+        }
+
+        cargarGrafica('');
+        cargarDistribucionCategorias();
+        cargarIngresosCategorias();
+        cargarTopJuegos();
+        cargarVentasFecha();
+
+        $('#filtroCategoria').change(function () {
+            cargarGrafica($(this).val());
+        });
+    </script>
+}

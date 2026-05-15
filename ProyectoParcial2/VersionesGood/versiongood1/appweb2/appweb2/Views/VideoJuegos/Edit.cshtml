@@ -1,0 +1,98 @@
+@model appweb2.Models.VideoJuego
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-xl-9">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                        <div>
+                            <h2 class="h4 mb-1">Editar videojuego</h2>
+                            <p class="text-muted mb-0">Actualiza precio, categoria, promocion y contenido visible del juego.</p>
+                        </div>
+                        <a asp-action="GestionCategorias" class="btn btn-outline-warning">Gestionar categorias</a>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" />
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="row g-4">
+                            <div class="col-lg-8">
+                                <div class="row g-4">
+                                    <div class="col-md-8">
+                                        <label asp-for="Titulo" class="form-label">Titulo</label>
+                                        <input asp-for="Titulo" class="form-control form-control-lg" />
+                                        <span asp-validation-for="Titulo" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="CategoriaId" class="form-label">Categoria</label>
+                                        <select asp-for="CategoriaId" class="form-select form-select-lg" asp-items="ViewBag.Categorias"></select>
+                                        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="Precio" class="form-label">Precio normal</label>
+                                        <input asp-for="Precio" type="number" step="0.01" min="0.01" class="form-control" />
+                                        <span asp-validation-for="Precio" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="PrecioPromocion" class="form-label">Precio promocion</label>
+                                        <input asp-for="PrecioPromocion" type="number" step="0.01" min="0" class="form-control" />
+                                        <span asp-validation-for="PrecioPromocion" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="EdadMinima" class="form-label">Edad minima</label>
+                                        <input asp-for="EdadMinima" type="number" min="0" max="21" class="form-control" />
+                                        <span asp-validation-for="EdadMinima" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input asp-for="EnPromocion" class="form-check-input" />
+                                            <label asp-for="EnPromocion" class="form-check-label">Mantener activo en promocion</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label asp-for="Descripcion" class="form-label">Descripcion</label>
+                                        <textarea asp-for="Descripcion" class="form-control" rows="5"></textarea>
+                                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Reemplazar imagen</label>
+                                        <input type="file" name="archivoImagen" class="form-control" accept="image/*" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="border rounded p-3 h-100 bg-light">
+                                    <h3 class="h6 mb-3">Imagen actual</h3>
+                                    @if (!string.IsNullOrWhiteSpace(Model.Imagen))
+                                    {
+                                        <img src="@Model.Imagen" class="img-fluid rounded border mb-3" alt="Portada de @Model.Titulo" />
+                                    }
+                                    else
+                                    {
+                                        <div class="text-muted small">Este juego aun no tiene imagen cargada.</div>
+                                    }
+                                    <div class="small text-muted">
+                                        Usa una imagen clara para el catalogo y procura mantener la misma linea visual del resto de juegos.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2 mt-4">
+                            <button type="submit" class="btn btn-warning px-4">Guardar cambios</button>
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Eliminar videojuego</a>
+                            <a asp-action="Index" class="btn btn-outline-secondary">Volver al catalogo</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

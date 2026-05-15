@@ -1,0 +1,160 @@
+@model appweb2.Models.DashboardViewModel
+@{
+    Layout = null;
+    var usuario = Context.Session.GetString("usuario");
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard</title>
+
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background-color: #f5f7fb;
+        }
+
+        .navbar-custom {
+            background: linear-gradient(90deg, #1e3c72, #2a5298);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+        }
+
+        .user-info {
+            color: white;
+            font-weight: 500;
+        }
+
+        .btn-logout {
+            border-radius: 10px;
+        }
+
+        .dashboard-container {
+            padding: 30px;
+        }
+
+        .card-placeholder {
+            height: 250px;
+            border-radius: 15px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-weight: 500;
+            background: white;
+        }
+
+        .welcome-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        #container {
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-custom px-4">
+        <a class="navbar-brand" href="#">Administración de sistema</a>
+
+        <div class="ms-auto d-flex align-items-center gap-3">
+            <span class="user-info">
+                👤 @usuario
+            </span>
+
+            <a asp-controller="Account" asp-action="Logout" class="btn btn-light btn-sm btn-logout">
+                Cerrar Sesión
+            </a>
+        </div>
+    </nav>
+    <div class="dashboard-container">
+
+
+        <div class="welcome-box">
+            <h4>Bienvenido, @usuario 👋</h4>
+            <p class="text-muted mb-0">
+                Este es tu panel principal. Aquí podrás visualizar estadísticas y gestionar el sistema.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Categoría</label>
+                    <select id="filtroCategoria" class="form-select">
+                        <option value="">Todas las categorías</option>
+                        @foreach (var categoria in Model.Categorias)
+                        {
+                            <option value="@categoria.CategoriaId">@categoria.Categoria</option>
+                        }
+                    </select>
+                </div>
+                <div id="container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function cargarGrafica(categoriaId) {
+            $.get('@Url.Action("ObtenerDatos", "Account")', { categoriaId: categoriaId }, function (data) {
+                var categorias = data.map(x => x.categoria);
+                var totales = data.map(x => x.total);
+
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Grafica de videos juegos por categorias',
+                        align: 'left'
+                    },
+                    xAxis: {
+                        categories: categorias
+                    },
+                    yAxis: {
+                        allowDecimals: false,
+                        min: 0,
+                        title: {
+                            text: 'Cantidad'
+                        }
+                    },
+                    series: [{
+                        name: 'Juegos',
+                        data: totales
+                    }]
+                });
+            });
+        }
+
+        cargarGrafica('');
+        $('#filtroCategoria').change(function () {
+            cargarGrafica($(this).val());
+        });
+    </script>
+
+</body>
+</html>

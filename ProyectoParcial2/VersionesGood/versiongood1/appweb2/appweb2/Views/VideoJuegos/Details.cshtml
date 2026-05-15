@@ -1,0 +1,77 @@
+@model appweb2.Models.VideoJuego
+
+@{
+    var esAdmin = string.Equals(Context.Session.GetString("rol"), "Admin", StringComparison.OrdinalIgnoreCase);
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h2 class="h4 mb-0">Detalle de videojuego</h2>
+        </div>
+
+        <div class="card-body">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    @if (!string.IsNullOrWhiteSpace(Model.Imagen))
+                    {
+                        <img src="@Model.Imagen" class="img-fluid rounded border" alt="Portada de @Model.Titulo" />
+                    }
+                </div>
+
+                <div class="col-md-8">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">Titulo</dt>
+                        <dd class="col-sm-8">@Model.Titulo</dd>
+
+                        <dt class="col-sm-4">Categoria</dt>
+                        <dd class="col-sm-8">@(Model.Categoria != null ? Model.Categoria.Nombre : "")</dd>
+
+                        <dt class="col-sm-4">Edad minima</dt>
+                        <dd class="col-sm-8">+@Model.EdadMinima</dd>
+
+                        <dt class="col-sm-4">Precio</dt>
+                        <dd class="col-sm-8">
+                            @if (Model.EnPromocion && Model.PrecioPromocion.HasValue)
+                            {
+                                <div class="fw-bold">$@Model.PrecioPromocion</div>
+                                <div class="text-muted" style="text-decoration: line-through;">$@Model.Precio</div>
+                                <div class="text-success">Descuento: $@(Model.Precio - Model.PrecioPromocion.Value)</div>
+                            }
+                            else
+                            {
+                                <div class="fw-bold">$@Model.Precio</div>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-4">Descripcion</dt>
+                        <dd class="col-sm-8">@Model.Descripcion</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer bg-white d-flex gap-2">
+            @if (!string.IsNullOrWhiteSpace(Context.Session.GetString("usuario")))
+            {
+                <form asp-action="AgregarAlCarrito" method="post" class="d-flex gap-2">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" name="cantidad" value="1" />
+                    <input type="hidden" name="irAlCarrito" value="true" />
+                    <button type="submit" class="btn btn-primary">Comprar ahora</button>
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Index" class="btn btn-primary">Inicia sesion para comprar</a>
+            }
+            @if (esAdmin)
+            {
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Eliminar</a>
+            }
+            <a asp-action="Index" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+</div>

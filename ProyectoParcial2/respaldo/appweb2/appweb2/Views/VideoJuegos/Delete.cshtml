@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model appweb2.Models.VideoJuego
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h2 class="h4 mb-0">Eliminar Videojuego</h2>
+        </div>
+
+        <div class="card-body">
+            <div class="alert alert-warning mb-4">
+                ¿Estás seguro que deseas eliminar este videojuego?
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    @if (!string.IsNullOrWhiteSpace(Model.Imagen))
+                    {
+                        <img src="@Model.Imagen" class="img-fluid rounded border" />
+                    }
+                </div>
+
+                <div class="col-md-8">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">Título</dt>
+                        <dd class="col-sm-8">@Model.Titulo</dd>
+
+                        <dt class="col-sm-4">Categoría</dt>
+                        <dd class="col-sm-8">@(Model.Categoria != null ? Model.Categoria.Nombre : "")</dd>
+
+                        <dt class="col-sm-4">Precio</dt>
+                        <dd class="col-sm-8">$@Model.Precio</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer bg-white d-flex gap-2">
+            <form asp-action="Delete" method="post" class="m-0">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</div>

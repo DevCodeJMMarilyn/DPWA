@@ -1,3 +1,25 @@
-.vs/
+# .NET
 bin/
-obj/S
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Dotnet local
+.dotnet/
+
+# NuGet
+.nuget/
+packages/
+
+# Logs
+*.log
+
+# Archivos comprimidos
+*.rar
+*.zip
+
+# Node
+node_modules/

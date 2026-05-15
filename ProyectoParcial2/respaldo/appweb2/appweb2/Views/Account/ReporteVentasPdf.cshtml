@@ -1,0 +1,202 @@
+@model appweb2.Models.ReporteVentasPdfViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@Model.NombreArchivo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #111827;
+            font-size: 12px;
+        }
+
+        .header {
+            display: table;
+            width: 100%;
+            border-bottom: 3px solid #7c3aed;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .brand, .report-meta {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .brand img {
+            max-height: 72px;
+            margin-right: 14px;
+            vertical-align: middle;
+        }
+
+        .brand-text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 0 0 4px;
+            font-size: 24px;
+            color: #111827;
+        }
+
+        .subtitle {
+            color: #4b5563;
+            font-size: 13px;
+        }
+
+        .report-meta {
+            text-align: right;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .filters {
+            border: 1px solid #d1d5db;
+            background: #f9fafb;
+            padding: 10px;
+            margin-bottom: 14px;
+        }
+
+        .summary {
+            display: table;
+            width: 100%;
+            border-spacing: 10px 0;
+            margin-bottom: 18px;
+        }
+
+        .card {
+            display: table-cell;
+            width: 33.333%;
+            border: 1px solid #d1d5db;
+            padding: 12px;
+            background: #ffffff;
+        }
+
+        .label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        .value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4c1d95;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 6px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #312e81;
+            color: #ffffff;
+            font-size: 11px;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="brand">
+            <img src="@Url.Content("~/img/logo.png")" alt="MishiGames" />
+            <div class="brand-text">
+                <h1>Reporte de detalle de ventas</h1>
+                <div class="subtitle">MishiGames - Ventas registradas</div>
+            </div>
+        </div>
+        <div class="report-meta">
+            <div><strong>Generado:</strong> @Model.FechaGeneracion.ToString("dd/MM/yyyy HH:mm:ss")</div>
+            <div><strong>Archivo:</strong> @Model.NombreArchivo</div>
+        </div>
+    </div>
+
+    <div class="filters">
+        <strong>Filtros:</strong>
+        Desde: @(Model.DesdeTexto ?? "Todos") |
+        Hasta: @(Model.HastaTexto ?? "Todos") |
+        Cliente: @(string.IsNullOrWhiteSpace(Model.Cliente) ? "Todos" : Model.Cliente) |
+        Videojuego: @(string.IsNullOrWhiteSpace(Model.Videojuego) ? "Todos" : Model.Videojuego)
+    </div>
+
+    <div class="summary">
+        <div class="card">
+            <div class="label">Transacciones</div>
+            <div class="value">@Model.TotalTransacciones</div>
+        </div>
+        <div class="card">
+            <div class="label">Unidades vendidas</div>
+            <div class="value">@Model.TotalUnidadesVendidas</div>
+        </div>
+        <div class="card">
+            <div class="label">Ingreso total</div>
+            <div class="value">$@Model.IngresoTotal.ToString("0.00")</div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Compra</th>
+                <th>Cliente</th>
+                <th>Juego</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th>Codigo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Ventas.Any())
+            {
+                @foreach (var item in Model.Ventas)
+                {
+                    <tr>
+                        <td>@item.CompraId</td>
+                        <td>@item.Cliente</td>
+                        <td>@item.Juego</td>
+                        <td class="text-right">@item.Cantidad</td>
+                        <td class="text-right">$@item.Total.ToString("0.00")</td>
+                        <td>@item.Estado</td>
+                        <td>@item.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@item.CodigoTransaccion</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8">No hay ventas registradas con los filtros seleccionados.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

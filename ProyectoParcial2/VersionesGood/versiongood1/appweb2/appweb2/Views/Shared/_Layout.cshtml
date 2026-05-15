@@ -1,0 +1,123 @@
+@{
+    var usuario = Context.Session.GetString("usuario");
+    var esAdmin = string.Equals(Context.Session.GetString("rol"), "Admin", StringComparison.OrdinalIgnoreCase);
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GameStore</title>
+    <script type="importmap"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/appweb2.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-custom shadow">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-warning" asp-controller="Home" asp-action="Index">
+                    GameStore
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="menuNavbar">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Contact">Contactos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="VideoJuegos" asp-action="Index">Catalogo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="VideoJuegos" asp-action="Categorias">Categorias</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        @if (!string.IsNullOrWhiteSpace(usuario))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @usuario
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="VideoJuegos" asp-action="Index">Videojuegos</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="VideoJuegos" asp-action="Carrito">Carrito</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="MisCompras">Mis compras</a>
+                                    </li>
+                                    @if (esAdmin)
+                                    {
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Account" asp-action="Dashboard">Dashboard</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="VideoJuegos" asp-action="Create">Crear videojuego</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="VideoJuegos" asp-action="GestionCategorias">Gestionar categorias</a>
+                                        </li>
+                                    }
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Cerrar sesion</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Index">
+                                    Iniciar sesion
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-accent ms-2" asp-controller="Account" asp-action="Register">
+                                    Registrarse
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="banner text-center text-white">
+    </section>
+
+    <div class="container mt-5">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer-custom text-center py-3 mt-5">
+        <div class="container">
+            &copy; 2026 - GameStore | Todos los derechos reservados
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

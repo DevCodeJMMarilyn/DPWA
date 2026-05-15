@@ -1,0 +1,79 @@
+@model appweb2.Models.VideoJuego
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-xl-9">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                        <div>
+                            <h2 class="h4 mb-1">Crear videojuego</h2>
+                            <p class="text-muted mb-0">Carga la informacion principal, promocion e imagen del juego.</p>
+                        </div>
+                        <a asp-action="GestionCategorias" class="btn btn-outline-warning">Gestionar categorias</a>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="row g-4">
+                            <div class="col-md-8">
+                                <label asp-for="Titulo" class="form-label">Titulo</label>
+                                <input asp-for="Titulo" class="form-control form-control-lg" placeholder="Ej. Elden Ring" />
+                                <span asp-validation-for="Titulo" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="CategoriaId" class="form-label">Categoria</label>
+                                <select asp-for="CategoriaId" class="form-select form-select-lg" asp-items="ViewBag.Categorias">
+                                    <option value="">Selecciona una categoria</option>
+                                </select>
+                                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Precio" class="form-label">Precio normal</label>
+                                <input asp-for="Precio" type="number" step="0.01" min="0.01" lang="en" class="form-control" />
+                                <span asp-validation-for="Precio" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="PrecioPromocion" class="form-label">Precio promocion</label>
+                                <input asp-for="PrecioPromocion" type="number" step="0.01" min="0" lang="en" class="form-control" />
+                                <span asp-validation-for="PrecioPromocion" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="EdadMinima" class="form-label">Edad minima</label>
+                                <input asp-for="EdadMinima" type="number" min="0" max="21" class="form-control" />
+                                <span asp-validation-for="EdadMinima" class="text-danger"></span>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch">
+                                    <input asp-for="EnPromocion" class="form-check-input" />
+                                    <label asp-for="EnPromocion" class="form-check-label">Mostrar este juego en promocion</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="Descripcion" class="form-label">Descripcion</label>
+                                <textarea asp-for="Descripcion" class="form-control" rows="4" placeholder="Resumen corto del juego, genero y puntos fuertes."></textarea>
+                                <span asp-validation-for="Descripcion" class="text-danger"></span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Imagen</label>
+                                <input type="file" name="archivoImagen" class="form-control" accept="image/*" />
+                                <div class="form-text">Sube la portada o arte promocional del juego.</div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2 mt-4">
+                            <button type="submit" class="btn btn-warning px-4">Guardar videojuego</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary">Volver al catalogo</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

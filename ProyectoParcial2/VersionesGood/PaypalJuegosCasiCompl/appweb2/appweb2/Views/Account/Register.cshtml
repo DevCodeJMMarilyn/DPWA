@@ -1,0 +1,58 @@
+@model appweb2.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Crear cuenta";
+}
+
+<div class="arcade-auth-wrapper">
+    <div class="arcade-auth-card" style="max-width: 480px;">
+        <!-- Logo / Brand -->
+        <div class="text-center mb-4">
+            <div class="auth-logo">🕹️</div>
+            <h1 class="auth-brand">MishiGames</h1>
+            <p class="auth-subtitle">Crea tu cuenta para empezar</p>
+        </div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="arcade-alert-error">
+                <i class="fas fa-exclamation-triangle me-2"></i>@ViewBag.Error
+            </div>
+        }
+
+        <form method="post" asp-action="Register">
+            @Html.AntiForgeryToken()
+            <div class="arcade-field mb-3">
+                <label class="arcade-label"><i class="fas fa-user me-2"></i>Nombre</label>
+                <input class="form-control arcade-input" asp-for="Nombre" placeholder="Tu nombre" required />
+                <span asp-validation-for="Nombre" class="arcade-field-error"></span>
+            </div>
+            <div class="arcade-field mb-3">
+                <label class="arcade-label"><i class="fas fa-envelope me-2"></i>Correo</label>
+                <input type="email" class="form-control arcade-input" asp-for="Email" placeholder="ejemplo@gmail.com" required />
+                <span asp-validation-for="Email" class="arcade-field-error"></span>
+            </div>
+            <div class="arcade-field mb-3">
+                <label class="arcade-label"><i class="fas fa-lock me-2"></i>Contraseña</label>
+                <input type="password" class="form-control arcade-input" asp-for="Password" placeholder="••••••••" required />
+                <span asp-validation-for="Password" class="arcade-field-error"></span>
+            </div>
+            <div class="arcade-field mb-4">
+                <label class="arcade-label"><i class="fas fa-lock me-2"></i>Confirmar contraseña</label>
+                <input type="password" class="form-control arcade-input" asp-for="ConfirmPassword" placeholder="••••••••" required />
+                <span asp-validation-for="ConfirmPassword" class="arcade-field-error"></span>
+            </div>
+            <button class="btn-arcade-primary w-100" type="submit">
+                <i class="fas fa-user-plus me-2"></i>Crear cuenta
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <span class="auth-hint">¿Ya tienes cuenta?</span>
+            <a asp-action="Index" class="auth-link">Inicia sesión</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

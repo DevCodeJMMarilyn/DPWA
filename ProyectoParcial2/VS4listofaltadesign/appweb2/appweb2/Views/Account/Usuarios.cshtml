@@ -1,0 +1,172 @@
+@model appweb2.Models.AdminUsuariosViewModel
+
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<div class="arcade-page-header mb-4">
+    <div>
+        <h2 class="arcade-page-title"><i class="fas fa-users me-2"></i>Usuarios registrados</h2>
+        <p class="arcade-page-sub">Consulta y administra las cuentas registradas en la plataforma.</p>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+        <a asp-controller="Account"
+           asp-action="UsuariosPdf"
+           asp-route-busqueda="@Model.Busqueda"
+           asp-route-roleId="@Model.RoleIdFiltro"
+           asp-route-desde="@(Model.Desde.HasValue ? Model.Desde.Value.ToString("yyyy-MM-dd") : null)"
+           asp-route-hasta="@(Model.Hasta.HasValue ? Model.Hasta.Value.ToString("yyyy-MM-dd") : null)"
+           class="btn-arcade-sm btn-arcade-gold">
+            <i class="fas fa-file-pdf me-1"></i>Reporte usuarios
+        </a>
+        <a asp-controller="Account" asp-action="Dashboard" class="btn-arcade-sm btn-arcade-outline">
+            <i class="fas fa-arrow-left me-1"></i>Dashboard
+        </a>
+    </div>
+</div>
+
+@if (TempData["UsuariosMensaje"] is string mensaje && !string.IsNullOrWhiteSpace(mensaje))
+{
+    <div class="arcade-alert-success mb-3"><i class="fas fa-check-circle me-2"></i>@mensaje</div>
+}
+
+@if (TempData["UsuariosError"] is string error && !string.IsNullOrWhiteSpace(error))
+{
+    <div class="arcade-alert-error mb-3"><i class="fas fa-exclamation-triangle me-2"></i>@error</div>
+}
+
+<div class="arcade-panel mb-4">
+    <div class="arcade-panel-header">
+        <i class="fas fa-filter me-2"></i>Filtrar usuarios
+    </div>
+    <div class="arcade-panel-body">
+        <form method="get" class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="arcade-label">Usuario</label>
+                <input type="text"
+                       name="busqueda"
+                       class="form-control arcade-input"
+                       value="@Model.Busqueda"
+                       placeholder="Nombre o correo" />
+            </div>
+            <div class="col-md-2">
+                <label class="arcade-label">Rol</label>
+                <select name="roleId" class="form-select arcade-input">
+                    <option value="">Todos los roles</option>
+                    @foreach (var rol in Model.RolesDisponibles)
+                    {
+                        if (Model.RoleIdFiltro.HasValue && rol.Value == Model.RoleIdFiltro.Value.ToString())
+                        {
+                            <option value="@rol.Value" selected>@rol.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@rol.Value">@rol.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="arcade-label">Desde</label>
+                <input type="date"
+                       name="desde"
+                       class="form-control arcade-input"
+                       value="@(Model.Desde.HasValue ? Model.Desde.Value.ToString("yyyy-MM-dd") : "")" />
+            </div>
+            <div class="col-md-2">
+                <label class="arcade-label">Hasta</label>
+                <input type="date"
+                       name="hasta"
+                       class="form-control arcade-input"
+                       value="@(Model.Hasta.HasValue ? Model.Hasta.Value.ToString("yyyy-MM-dd") : "")" />
+            </div>
+            <div class="col-md-2 d-flex gap-2">
+                <button type="submit" class="btn-arcade-primary">
+                    <i class="fas fa-search me-1"></i>Filtrar
+                </button>
+                <a asp-controller="Account" asp-action="Usuarios" class="btn-arcade-sm btn-arcade-outline">
+                    Limpiar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="arcade-panel">
+    <div class="arcade-panel-header">
+        <i class="fas fa-id-card me-2"></i>Listado de usuarios
+    </div>
+    <div class="arcade-panel-body p-0">
+        @if (Model.Usuarios.Any())
+        {
+            <div class="table-responsive">
+                <table class="arcade-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Rol</th>
+                            <th>Registro</th>
+                            <th class="text-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var usuario in Model.Usuarios)
+                        {
+                            var formId = $"usuario-form-{usuario.Id}";
+
+                            <tr>
+                                <td>
+                                    <input type="text" name="nombre" value="@usuario.Nombre" form="@formId" class="form-control arcade-input" style="min-width: 180px;" />
+                                </td>
+                                <td>
+                                    <span class="fw-bold">@usuario.Email</span>
+                                    @if (usuario.EsUsuarioActual)
+                                    {
+                                        <div><span class="arcade-badge-success">Tu sesion</span></div>
+                                    }
+                                </td>
+                                <td>
+                                    <select name="roleId" form="@formId" class="form-select arcade-input" style="min-width: 140px;">
+                                        @foreach (var rol in Model.RolesDisponibles)
+                                        {
+                                            if (rol.Value == usuario.RoleId.ToString())
+                                            {
+                                                <option value="@rol.Value" selected>@rol.Text</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@rol.Value">@rol.Text</option>
+                                            }
+                                        }
+                                    </select>
+                                </td>
+                                <td>@usuario.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td class="text-end">
+                                    <form id="@formId" asp-action="ActualizarUsuario" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@usuario.Id" />
+                                        <button type="submit" class="btn-arcade-sm btn-arcade-outline">
+                                            <i class="fas fa-save me-1"></i>Guardar
+                                        </button>
+                                    </form>
+                                    <form asp-action="EliminarUsuario" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@usuario.Id" />
+                                        <button type="submit" class="btn-arcade-sm btn-arcade-danger" @(usuario.EsUsuarioActual ? "disabled" : null)>
+                                            <i class="fas fa-trash me-1"></i>Eliminar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="p-4 text-center text-muted">No se encontraron usuarios con los filtros seleccionados.</div>
+        }
+    </div>
+</div>

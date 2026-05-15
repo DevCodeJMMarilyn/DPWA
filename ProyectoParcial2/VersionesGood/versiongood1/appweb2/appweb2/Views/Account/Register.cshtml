@@ -1,0 +1,52 @@
+@{
+    Layout = null;
+}
+
+@model appweb2.Models.RegisterViewModel
+
+<div class="container mt-5">
+    <div class="col-md-4 mx-auto">
+        <div class="card p-4 shadow rounded-4">
+            <h3 class="text-center mb-3">Registrarse</h3>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form method="post" asp-action="Register">
+                <div class="mb-3">
+                    <label>Nombre</label>
+                    <input class="form-control" asp-for="Nombre" required />
+                    <span asp-validation-for="Nombre"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label>Correo</label>
+                    <input type="email" class="form-control" asp-for="Email" required />
+                    <span asp-validation-for="Email"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label>Contraseña</label>
+                    <input type="password" class="form-control" asp-for="Password" required />
+                    <span asp-validation-for="Password"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label>Confirmar contraseña</label>
+                    <input type="password" class="form-control" asp-for="ConfirmPassword" required />
+                    <span asp-validation-for="ConfirmPassword"></span>
+                </div>
+
+                <button class="btn btn-accent w-100" type="submit">Crear cuenta</button>
+            </form>
+
+            <div class="text-center mt-3">
+                <a asp-action="Index">Volver a iniciar sesión</a>
+            </div>
+        </div>
+    </div>
+</div>

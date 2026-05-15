@@ -1,0 +1,145 @@
+@model appweb2.Models.CarritoViewModel
+
+@{
+    ViewData["Title"] = "Carrito";
+}
+
+<div class="container mt-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <h2 class="mb-1">Carrito de compras</h2>
+            <p class="text-muted mb-0">Revisa tus juegos, el total y confirma la compra con Povy Sandbox.</p>
+        </div>
+        <a asp-action="Index" class="btn btn-outline-secondary">Seguir comprando</a>
+    </div>
+
+    @if (TempData["CarritoMensaje"] is string mensaje && !string.IsNullOrWhiteSpace(mensaje))
+    {
+        <div class="alert alert-success">@mensaje</div>
+    }
+
+    @if (TempData["CarritoError"] is string error && !string.IsNullOrWhiteSpace(error))
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+
+    @if (Model.Items.Any())
+    {
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white">
+                        <h3 class="h5 mb-0">Juegos en tu carrito</h3>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var item in Model.Items)
+                        {
+                            <div class="row align-items-center border-bottom py-3 g-3">
+                                <div class="col-md-2">
+                                    @if (!string.IsNullOrWhiteSpace(item.Imagen))
+                                    {
+                                        <img src="@item.Imagen" class="img-fluid rounded border" alt="Portada de @item.Titulo" />
+                                    }
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="fw-semibold">@item.Titulo</div>
+                                    <div class="text-muted small">@item.Categoria</div>
+                                    <div class="small text-muted">Precio unitario: $@item.PrecioUnitario</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <form asp-action="ActualizarCarrito" method="post" class="d-flex gap-2 align-items-center">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@item.VideoJuegoId" />
+                                        <input type="number" name="cantidad" value="@item.Cantidad" min="1" class="form-control" />
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">Actualizar</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-2 text-md-end">
+                                    <span class="fw-semibold">$@item.Subtotal</span>
+                                </div>
+                                <div class="col-md-1 text-md-end">
+                                    <form asp-action="QuitarDelCarrito" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@item.VideoJuegoId" />
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">X</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white">
+                        <h3 class="h5 mb-0">Resumen de pago</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Total de juegos</span>
+                            <span>@Model.Items.Count</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4">
+                            <span class="fw-semibold">Total</span>
+                            <span class="fw-bold">$@Model.Total</span>
+                        </div>
+
+                        <form asp-action="ProcesarCompra" method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="mb-3">
+                                <label class="form-label">Metodo de pago</label>
+                                <input class="form-control" value="Povy" disabled />
+                                <input asp-for="MetodoPago" type="hidden" value="Povy" />
+                                <div class="form-text">Pago procesado con Povy Sandbox.</div>
+                            </div>
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                            <div class="mb-3">
+                                <label asp-for="NumeroTarjeta" class="form-label">Numero de tarjeta</label>
+                                <input asp-for="NumeroTarjeta" class="form-control" inputmode="numeric" placeholder="4111111111111111" />
+                                <span asp-validation-for="NumeroTarjeta" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="NombreTitular" class="form-label">Nombre del titular</label>
+                                <input asp-for="NombreTitular" class="form-control" placeholder="Como aparece en la tarjeta" />
+                                <span asp-validation-for="NombreTitular" class="text-danger"></span>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-4">
+                                    <label asp-for="ExpMonth" class="form-label">Mes</label>
+                                    <input asp-for="ExpMonth" class="form-control" inputmode="numeric" placeholder="12" />
+                                    <span asp-validation-for="ExpMonth" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <label asp-for="ExpYear" class="form-label">Año</label>
+                                    <input asp-for="ExpYear" class="form-control" inputmode="numeric" placeholder="29" />
+                                    <span asp-validation-for="ExpYear" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <label asp-for="Cvv" class="form-label">CVV</label>
+                                    <input asp-for="Cvv" class="form-control" inputmode="numeric" placeholder="123" />
+                                    <span asp-validation-for="Cvv" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Confirmar compra</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center py-5">
+                <h3 class="h5">Tu carrito esta vacio</h3>
+                <p class="text-muted">Agrega uno o varios juegos desde el catalogo para continuar.</p>
+                <a asp-action="Index" class="btn btn-warning">Explorar videojuegos</a>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

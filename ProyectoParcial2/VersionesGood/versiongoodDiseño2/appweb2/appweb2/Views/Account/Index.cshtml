@@ -1,0 +1,48 @@
+@model appweb2.Models.Login
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<div class="arcade-auth-wrapper">
+    <div class="arcade-auth-card">
+        <!-- Logo / Brand -->
+        <div class="text-center mb-4">
+            <div class="auth-logo">🕹️</div>
+            <h1 class="auth-brand">MishiGames</h1>
+            <p class="auth-subtitle">Inicia sesión para continuar</p>
+        </div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="arcade-alert-error">
+                <i class="fas fa-exclamation-triangle me-2"></i>@ViewBag.Error
+            </div>
+        }
+
+        <form asp-action="Login" method="post">
+            @Html.AntiForgeryToken()
+            <div class="arcade-field mb-3">
+                <label class="arcade-label"><i class="fas fa-envelope me-2"></i>Correo</label>
+                <input asp-for="correo" class="form-control arcade-input" placeholder="ejemplo@gmail.com" />
+                <span asp-validation-for="correo" class="arcade-field-error"></span>
+            </div>
+            <div class="arcade-field mb-4">
+                <label class="arcade-label"><i class="fas fa-lock me-2"></i>Contraseña</label>
+                <input asp-for="password" type="password" class="form-control arcade-input" placeholder="••••••••" />
+                <span asp-validation-for="password" class="arcade-field-error"></span>
+            </div>
+            <button type="submit" class="btn-arcade-primary w-100">
+                <i class="fas fa-gamepad me-2"></i>Ingresar
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <span class="auth-hint">¿No tienes cuenta?</span>
+            <a asp-action="Register" class="auth-link">Regístrate aquí</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

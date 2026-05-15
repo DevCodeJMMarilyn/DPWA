@@ -1,0 +1,100 @@
+@model IEnumerable<appweb2.Models.VideoJuego>
+
+@{
+    ViewData["Title"] = "Inicio";
+    ViewData["ShowBanner"] = true;
+    var esAdmin = string.Equals(Context.Session.GetString("rol"), "Admin", StringComparison.OrdinalIgnoreCase);
+}
+
+<div class="container mt-5">
+    @if (esAdmin)
+    {
+        <div class="d-flex flex-wrap gap-2 justify-content-center mb-4">
+            <a class="btn btn-warning" asp-action="Create">Nuevo videojuego</a>
+            <a class="btn btn-outline-warning" asp-action="GestionCategorias">Gestionar categorias</a>
+            <a class="btn btn-outline-light" asp-controller="Account" asp-action="Dashboard">Dashboard</a>
+        </div>
+    }
+
+    <div class="row text-center mb-5">
+        <div class="col-md-3 mb-3">
+            <a class="feature-card d-block" asp-controller="VideoJuegos" asp-action="Categorias">
+                <i class="fas fa-gamepad"></i>
+                <h5>Categorias</h5>
+                <p>Explora por tipo de juego</p>
+            </a>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="feature-card">
+                <i class="fas fa-fire"></i>
+                <h5>Mas vendidos</h5>
+                <p>Los juegos mas populares</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <a class="feature-card d-block" asp-controller="VideoJuegos" asp-action="NuevosJuegos">
+                <i class="fas fa-star"></i>
+                <h5>Nuevos juegos</h5>
+                <p>Lo ultimo en la tienda</p>
+            </a>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <a class="feature-card d-block" asp-controller="VideoJuegos" asp-action="Promociones">
+                <i class="fas fa-tags"></i>
+                <h5>Promociones</h5>
+                <p>Ofertas especiales</p>
+            </a>
+        </div>
+    </div>
+
+    <h2 id="juegos" class="text-center fw-bold mb-4 heading-neon">Videojuegos disponibles</h2>
+
+    <div class="row g-4">
+        @foreach (var juego in Model)
+        {
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="card game-card h-100">
+                    <div class="badge-top">+@juego.EdadMinima</div>
+
+                    <div class="favorite">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+
+                    <img src="@juego.Imagen" class="card-img-top game-img" alt="Portada de @juego.Titulo" />
+
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">@juego.Titulo</h5>
+
+                        @if (juego.EnPromocion && juego.PrecioPromocion.HasValue)
+                        {
+                            <h4 class="price mt-2">$@juego.PrecioPromocion</h4>
+                            <div class="text-muted" style="text-decoration: line-through;">$@juego.Precio</div>
+                            <div class="text-success">Descuento: $@(juego.Precio - juego.PrecioPromocion.Value)</div>
+                        }
+                        else
+                        {
+                            <h4 class="price mt-2">$@juego.Precio</h4>
+                        }
+
+                        <div class="d-flex align-items-center mt-auto">
+                            <i class="fa-solid fa-gamepad me-2 text-warning"></i>
+                            <span class="text-muted">@(juego.Categoria != null ? juego.Categoria.Nombre : "")</span>
+                        </div>
+
+                        <div class="mt-3 d-flex gap-2 flex-wrap">
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@juego.Id">Ver</a>
+                            @if (esAdmin)
+                            {
+                                <a class="btn btn-sm btn-outline-warning" asp-action="Edit" asp-route-id="@juego.Id">Editar</a>
+                                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@juego.Id">Eliminar</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

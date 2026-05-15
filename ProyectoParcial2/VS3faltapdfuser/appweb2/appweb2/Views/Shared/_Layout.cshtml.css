@@ -1,0 +1,211 @@
+/* =====================================================
+   MishiGames — Layout base overrides
+   All link/button colors handled by site.css arcade theme
+   ===================================================== */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Override Bootstrap/ASP.NET default blue link color
+   so arcade theme classes take full control */
+a {
+  color: var(--neon-purple, #c084fc);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--neon-pink, #f472b6);
+  text-decoration: none;
+}
+
+/* Banner buttons — force white text regardless of any a{} rule */
+a.btn-banner-primary,
+a.btn-banner-primary:hover,
+a.btn-banner-primary:focus,
+a.btn-banner-primary:visited {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+a.btn-banner-outline,
+a.btn-banner-outline:hover,
+a.btn-banner-outline:focus,
+a.btn-banner-outline:visited {
+  text-decoration: none !important;
+}
+
+/* Arcade button overrides — make sure all arcade buttons have correct text */
+a.btn-arcade-primary,
+a.btn-arcade-primary:hover,
+a.btn-arcade-primary:focus {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+a.btn-arcade-gold,
+a.btn-arcade-gold:hover {
+  color: #0a0014 !important;
+  text-decoration: none !important;
+}
+
+a.btn-arcade-outline,
+a.btn-arcade-outline:hover {
+  color: var(--neon-purple, #c084fc);
+  text-decoration: none !important;
+}
+
+a.btn-arcade-outline:hover {
+  color: #ffffff !important;
+}
+
+a.btn-arcade-danger,
+a.btn-arcade-danger:hover {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+a.btn-arcade-sm {
+  text-decoration: none !important;
+}
+
+/* Fix Bootstrap btn-primary for arcade pages */
+.btn-primary {
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  border: none;
+  color: #fff;
+  border-radius: 20px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: all 0.25s;
+  box-shadow: 0 0 15px rgba(124,58,237,0.4);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ec4899, #7c3aed);
+  box-shadow: 0 0 25px rgba(236,72,153,0.5);
+  color: #fff;
+}
+
+/* Fix Bootstrap btn-secondary */
+.btn-secondary {
+  background: rgba(124,58,237,0.15);
+  border: 1px solid rgba(124,58,237,0.4);
+  color: var(--neon-purple, #c084fc);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  border-radius: 20px;
+  transition: all 0.25s;
+}
+
+.btn-secondary:hover {
+  background: rgba(124,58,237,0.3);
+  color: #fff;
+  border-color: var(--neon-purple, #c084fc);
+}
+
+/* Fix Bootstrap btn-success */
+.btn-success {
+  background: linear-gradient(135deg, #059669, #047857);
+  border: none;
+  color: #fff;
+  border-radius: 20px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(5,150,105,0.4);
+  transition: all 0.25s;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 0 25px rgba(16,185,129,0.5);
+  color: #fff;
+}
+
+/* Fix Bootstrap btn-outline-primary */
+.btn-outline-primary {
+  color: var(--neon-blue, #60a5fa);
+  border-color: var(--neon-blue, #60a5fa);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  border-radius: 20px;
+  transition: all 0.25s;
+}
+
+.btn-outline-primary:hover {
+  background: var(--neon-blue, #60a5fa);
+  color: #0a0014;
+  box-shadow: 0 0 15px rgba(96,165,250,0.5);
+}
+
+/* Bootstrap card overrides */
+.card {
+  background: linear-gradient(145deg, #1a0a3e 0%, #0e1840 100%);
+  border: 1px solid rgba(124,58,237,0.3);
+  color: var(--text-bright, #f0e6ff);
+}
+
+.card-header {
+  background: linear-gradient(90deg, rgba(124,58,237,0.2), rgba(37,99,235,0.1)) !important;
+  border-bottom: 1px solid rgba(124,58,237,0.3);
+  color: var(--neon-purple, #c084fc);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+}
+
+.card-footer {
+  background: rgba(124,58,237,0.06) !important;
+  border-top: 1px solid rgba(124,58,237,0.2);
+}
+
+/* Bootstrap table overrides */
+.table {
+  color: var(--text-bright, #f0e6ff);
+}
+
+.table-dark {
+  background: linear-gradient(90deg, rgba(124,58,237,0.3), rgba(37,99,235,0.2));
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--neon-purple, #c084fc);
+}
+
+/* Bootstrap alert overrides */
+.alert-success {
+  background: rgba(16,185,129,0.12);
+  border-color: rgba(16,185,129,0.4);
+  color: #6ee7b7;
+}
+
+.alert-danger {
+  background: rgba(239,68,68,0.1);
+  border-color: rgba(239,68,68,0.35);
+  color: #fca5a5;
+}
+
+/* badge */
+.badge.text-bg-success {
+  background: rgba(16,185,129,0.2) !important;
+  color: #6ee7b7 !important;
+  border: 1px solid rgba(16,185,129,0.4);
+}
+
+.badge.text-bg-secondary {
+  background: rgba(124,58,237,0.2) !important;
+  color: var(--neon-purple, #c084fc) !important;
+  border: 1px solid rgba(124,58,237,0.4);
+}
+
+/* dropdown-toggle arrow color */
+.dropdown-toggle::after {
+  color: var(--neon-purple, #c084fc);
+}
+
+/* form-text (hint text below inputs) */
+.form-text {
+  color: var(--text-muted, #a78bca);
+  font-family: 'Rajdhani', sans-serif;
+}

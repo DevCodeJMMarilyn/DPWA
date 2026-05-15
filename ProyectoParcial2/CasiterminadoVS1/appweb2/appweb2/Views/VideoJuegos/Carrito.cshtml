@@ -1,0 +1,228 @@
+@model appweb2.Models.CarritoViewModel
+
+@{
+    ViewData["Title"] = "Carrito";
+    var paypalTotal = Model.Total.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+    var paypalCurrency = string.IsNullOrWhiteSpace(Model.PayPalCurrency) ? "USD" : Model.PayPalCurrency;
+    var paypalClientId = Uri.EscapeDataString(Model.PayPalClientId ?? string.Empty);
+    var paypalCurrencyScript = Uri.EscapeDataString(paypalCurrency);
+}
+
+<div class="arcade-page-header mb-4">
+    <div>
+        <h2 class="arcade-page-title"><i class="fas fa-shopping-cart me-2"></i>Carrito de compras</h2>
+        <p class="arcade-page-sub">Revisa tus juegos, el total y confirma la compra.</p>
+    </div>
+    <a asp-action="Index" class="btn-arcade-sm btn-arcade-outline">
+        <i class="fas fa-arrow-left me-1"></i>Seguir comprando
+    </a>
+</div>
+
+@if (TempData["CarritoMensaje"] is string mensaje && !string.IsNullOrWhiteSpace(mensaje))
+{
+    <div class="arcade-alert-success mb-3"><i class="fas fa-check-circle me-2"></i>@mensaje</div>
+}
+@if (TempData["CarritoError"] is string error && !string.IsNullOrWhiteSpace(error))
+{
+    <div class="arcade-alert-error mb-3"><i class="fas fa-exclamation-triangle me-2"></i>@error</div>
+}
+
+@if (Model.Items.Any())
+{
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="arcade-panel">
+                <div class="arcade-panel-header">
+                    <i class="fas fa-gamepad me-2"></i>Juegos en tu carrito
+                </div>
+                <div class="arcade-panel-body p-0">
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="carrito-item">
+                            <div class="carrito-img">
+                                @if (!string.IsNullOrWhiteSpace(item.Imagen))
+                                {
+                                    <img src="@item.Imagen" class="img-fluid rounded" alt="@item.Titulo" />
+                                }
+                            </div>
+                            <div class="carrito-info">
+                                <div class="carrito-titulo">@item.Titulo</div>
+                                <div class="carrito-cat">@item.Categoria</div>
+                                <div class="carrito-precio-unit">Precio unitario: <span>$@item.PrecioUnitario</span></div>
+                            </div>
+                            <div class="carrito-qty">
+                                <form asp-action="ActualizarCarrito" method="post" class="d-flex gap-2 align-items-center">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@item.VideoJuegoId" />
+                                    <input type="number" name="cantidad" value="@item.Cantidad" min="1" class="form-control arcade-input" style="width: 70px;" />
+                                    <button type="submit" class="btn-arcade-sm btn-arcade-outline">OK</button>
+                                </form>
+                            </div>
+                            <div class="carrito-subtotal">$@item.Subtotal</div>
+                            <div class="carrito-remove">
+                                <form asp-action="QuitarDelCarrito" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@item.VideoJuegoId" />
+                                    <button type="submit" class="btn-arcade-sm btn-arcade-danger"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="arcade-panel">
+                <div class="arcade-panel-header">
+                    <i class="fas fa-credit-card me-2"></i>Resumen de pago
+                </div>
+                <div class="arcade-panel-body">
+                    <div class="d-flex justify-content-between mb-2 text-muted">
+                        <span>Total de juegos</span>
+                        <span>@Model.Items.Count</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-4">
+                        <span class="fw-bold">Total</span>
+                        <span class="price" style="font-size: 1.4rem;">$@Model.Total</span>
+                    </div>
+
+                    <form asp-action="ProcesarCompra" method="post" id="paypal-checkout-form">
+                        @Html.AntiForgeryToken()
+                        <div class="arcade-field mb-3">
+                            <label class="arcade-label">Metodo de pago</label>
+                            <div class="carrito-metodo-pago">
+                                <i class="fab fa-paypal me-2" style="color: #0070ba;"></i>
+                                <span>PayPal Sandbox</span>
+                                <span class="carrito-sandbox-badge">TEST</span>
+                            </div>
+                            <input asp-for="MetodoPago" type="hidden" value="PayPal" />
+                            <input asp-for="PayPalOrderId" type="hidden" id="paypal-order-id" />
+                            <input asp-for="PayPalCaptureId" type="hidden" id="paypal-capture-id" />
+                        </div>
+                        <div asp-validation-summary="ModelOnly" class="arcade-alert-error mb-3"></div>
+
+                        <div class="paypal-checkout-note mb-3">
+                            Seras redirigida al entorno Sandbox de PayPal para aprobar la compra de prueba.
+                            Usa una cuenta sandbox personal/compradora; la cuenta business es la vendedora y PayPal no permite pagar con ella.
+                        </div>
+
+                        @if (string.IsNullOrWhiteSpace(Model.PayPalClientId))
+                        {
+                            <div class="arcade-alert-error mb-0">
+                                Falta configurar el Client ID de PayPal Sandbox.
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="paypal-button-container"></div>
+                            <div id="paypal-processing-message" class="paypal-processing-message d-none">
+                                Registrando tu compra...
+                            </div>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="arcade-empty-state">
+        <i class="fas fa-shopping-cart"></i>
+        <h3>Tu carrito esta vacio</h3>
+        <p>Agrega videojuegos desde el catalogo para continuar.</p>
+        <a asp-action="Index" class="btn-arcade-primary mt-2" style="color:#fff !important; text-decoration:none;">
+            <i class="fas fa-gamepad me-2" style="color:#fff;"></i>Explorar videojuegos
+        </a>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    @if (Model.Items.Any() && !string.IsNullOrWhiteSpace(Model.PayPalClientId))
+    {
+        <script src="https://www.paypal.com/sdk/js?client-id=@paypalClientId&currency=@paypalCurrencyScript&components=buttons"></script>
+        <script>
+            const paypalTotal = @Json.Serialize(paypalTotal);
+            const paypalCurrency = @Json.Serialize(paypalCurrency);
+            const paypalAppName = @Json.Serialize(Model.PayPalAppName);
+            const antiForgeryToken = document.querySelector('#paypal-checkout-form input[name="__RequestVerificationToken"]').value;
+            const crearOrdenUrl = '@Url.Action("CrearOrdenPayPal", "VideoJuegos")';
+            const capturarOrdenUrl = '@Url.Action("CapturarOrdenPayPal", "VideoJuegos")';
+
+            async function leerRespuestaJson(response) {
+                const data = await response.json().catch(function () {
+                    return {};
+                });
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'No fue posible comunicarse con PayPal Sandbox.');
+                }
+
+                return data;
+            }
+
+            paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'gold',
+                    shape: 'rect',
+                    label: 'paypal'
+                },
+                createOrder: function () {
+                    return fetch(crearOrdenUrl, {
+                        method: 'POST',
+                        headers: {
+                            'RequestVerificationToken': antiForgeryToken
+                        }
+                    })
+                        .then(leerRespuestaJson)
+                        .then(function (data) {
+                            if (!data.id) {
+                                throw new Error('PayPal Sandbox no devolvio el id de la orden.');
+                            }
+
+                            return data.id;
+                        });
+                },
+                onApprove: function (data) {
+                    document.getElementById('paypal-processing-message').classList.remove('d-none');
+
+                    return fetch(capturarOrdenUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': antiForgeryToken
+                        },
+                        body: JSON.stringify({
+                            orderId: data.orderID
+                        })
+                    })
+                        .then(leerRespuestaJson)
+                        .then(function (result) {
+                            if (!result.redirectUrl) {
+                                throw new Error('La compra fue procesada, pero no se recibio la ruta de confirmacion.');
+                            }
+
+                            window.location.href = result.redirectUrl;
+                        })
+                        .catch(function (error) {
+                            document.getElementById('paypal-processing-message').classList.add('d-none');
+                            alert(error.message);
+                        });
+                },
+                onCancel: function () {
+                    document.getElementById('paypal-processing-message').classList.add('d-none');
+                },
+                onError: function (error) {
+                    document.getElementById('paypal-processing-message').classList.add('d-none');
+                    alert(error.message || 'No fue posible completar el pago con PayPal Sandbox. Intentalo nuevamente.');
+                }
+            }).render('#paypal-button-container');
+        </script>
+        <script>
+            console.info('PayPal Sandbox configurado para ' + paypalAppName + ' (' + paypalCurrency + ' ' + paypalTotal + ').');
+        </script>
+    }
+}

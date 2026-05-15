@@ -1,0 +1,148 @@
+@model appweb2.Models.CarritoViewModel
+
+@{
+    ViewData["Title"] = "Carrito";
+}
+
+<div class="arcade-page-header mb-4">
+    <div>
+        <h2 class="arcade-page-title"><i class="fas fa-shopping-cart me-2"></i>Carrito de compras</h2>
+        <p class="arcade-page-sub">Revisa tus juegos, el total y confirma la compra.</p>
+    </div>
+    <a asp-action="Index" class="btn-arcade-sm btn-arcade-outline">
+        <i class="fas fa-arrow-left me-1"></i>Seguir comprando
+    </a>
+</div>
+
+@if (TempData["CarritoMensaje"] is string mensaje && !string.IsNullOrWhiteSpace(mensaje))
+{
+    <div class="arcade-alert-success mb-3"><i class="fas fa-check-circle me-2"></i>@mensaje</div>
+}
+@if (TempData["CarritoError"] is string error && !string.IsNullOrWhiteSpace(error))
+{
+    <div class="arcade-alert-error mb-3"><i class="fas fa-exclamation-triangle me-2"></i>@error</div>
+}
+
+@if (Model.Items.Any())
+{
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="arcade-panel">
+                <div class="arcade-panel-header">
+                    <i class="fas fa-gamepad me-2"></i>Juegos en tu carrito
+                </div>
+                <div class="arcade-panel-body p-0">
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="carrito-item">
+                            <div class="carrito-img">
+                                @if (!string.IsNullOrWhiteSpace(item.Imagen))
+                                {
+                                    <img src="@item.Imagen" class="img-fluid rounded" alt="@item.Titulo" />
+                                }
+                            </div>
+                            <div class="carrito-info">
+                                <div class="carrito-titulo">@item.Titulo</div>
+                                <div class="carrito-cat">@item.Categoria</div>
+                                <div class="carrito-precio-unit">Precio unitario: <span>$@item.PrecioUnitario</span></div>
+                            </div>
+                            <div class="carrito-qty">
+                                <form asp-action="ActualizarCarrito" method="post" class="d-flex gap-2 align-items-center">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@item.VideoJuegoId" />
+                                    <input type="number" name="cantidad" value="@item.Cantidad" min="1" class="form-control arcade-input" style="width: 70px;" />
+                                    <button type="submit" class="btn-arcade-sm btn-arcade-outline">OK</button>
+                                </form>
+                            </div>
+                            <div class="carrito-subtotal">$@item.Subtotal</div>
+                            <div class="carrito-remove">
+                                <form asp-action="QuitarDelCarrito" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@item.VideoJuegoId" />
+                                    <button type="submit" class="btn-arcade-sm btn-arcade-danger"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="arcade-panel">
+                <div class="arcade-panel-header">
+                    <i class="fas fa-credit-card me-2"></i>Resumen de pago
+                </div>
+                <div class="arcade-panel-body">
+                    <div class="d-flex justify-content-between mb-2 text-muted">
+                        <span>Total de juegos</span>
+                        <span>@Model.Items.Count</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-4">
+                        <span class="fw-bold">Total</span>
+                        <span class="price" style="font-size: 1.4rem;">$@Model.Total</span>
+                    </div>
+
+                    <form asp-action="ProcesarCompra" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="arcade-field mb-3">
+                            <label class="arcade-label">Método de pago</label>
+                            <div class="carrito-metodo-pago">
+                                <i class="fas fa-lock me-2" style="color: var(--neon-purple);"></i>
+                                <span>Povy Sandbox</span>
+                                <span class="carrito-sandbox-badge">TEST</span>
+                            </div>
+                            <input asp-for="MetodoPago" type="hidden" value="Povy" />
+                        </div>
+                        <div asp-validation-summary="ModelOnly" class="arcade-alert-error mb-3"></div>
+                        <div class="arcade-field mb-3">
+                            <label asp-for="NumeroTarjeta" class="arcade-label">Número de tarjeta</label>
+                            <input asp-for="NumeroTarjeta" class="form-control arcade-input" inputmode="numeric" placeholder="4111111111111111" />
+                            <span asp-validation-for="NumeroTarjeta" class="arcade-field-error"></span>
+                        </div>
+                        <div class="arcade-field mb-3">
+                            <label asp-for="NombreTitular" class="arcade-label">Titular</label>
+                            <input asp-for="NombreTitular" class="form-control arcade-input" placeholder="Como aparece en la tarjeta" />
+                            <span asp-validation-for="NombreTitular" class="arcade-field-error"></span>
+                        </div>
+                        <div class="row g-2 mb-4">
+                            <div class="col-4">
+                                <label asp-for="ExpMonth" class="arcade-label">Mes</label>
+                                <input asp-for="ExpMonth" class="form-control arcade-input" inputmode="numeric" placeholder="12" />
+                                <span asp-validation-for="ExpMonth" class="arcade-field-error"></span>
+                            </div>
+                            <div class="col-4">
+                                <label asp-for="ExpYear" class="arcade-label">Año</label>
+                                <input asp-for="ExpYear" class="form-control arcade-input" inputmode="numeric" placeholder="29" />
+                                <span asp-validation-for="ExpYear" class="arcade-field-error"></span>
+                            </div>
+                            <div class="col-4">
+                                <label asp-for="Cvv" class="arcade-label">CVV</label>
+                                <input asp-for="Cvv" class="form-control arcade-input" inputmode="numeric" placeholder="123" />
+                                <span asp-validation-for="Cvv" class="arcade-field-error"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-arcade-primary w-100">
+                            <i class="fas fa-bolt me-2"></i>Confirmar compra
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="arcade-empty-state">
+        <i class="fas fa-shopping-cart"></i>
+        <h3>Tu carrito está vacío</h3>
+        <p>Agrega videojuegos desde el catálogo para continuar.</p>
+        <a asp-action="Index" class="btn-arcade-primary mt-2" style="color:#fff !important; text-decoration:none;">
+            <i class="fas fa-gamepad me-2" style="color:#fff;"></i>Explorar videojuegos
+        </a>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
