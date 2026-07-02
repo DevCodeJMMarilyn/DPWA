@@ -1,0 +1,39 @@
+@ApiOne_HostAddress = http://localhost:5194
+
+GET {{ApiOne_HostAddress}}/api/MusicItems
+Accept: application/json
+
+###
+
+POST {{ApiOne_HostAddress}}/api/MusicItems
+Content-Type: application/json
+
+{
+  "title": "Beat It",
+  "artist": "Michael Jackson",
+  "genre": "Pop",
+  "releaseYear": 1986,
+  "price": 5,
+  "stock": 100
+}
+
+###
+
+PUT {{ApiOne_HostAddress}}/api/MusicItems/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Beat It Remix",
+  "artist": "Michael Jackson",
+  "genre": "Pop",
+  "releaseYear": 1986,
+  "price": 6,
+  "stock": 90
+}
+
+###
+
+DELETE {{ApiOne_HostAddress}}/api/MusicItems/1
+
+###

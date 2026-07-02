@@ -1,0 +1,114 @@
+Bearer
+Empresa
+
+{
+  "nombreUsuario": "empresa1",
+  "email": "empresa1@gmail.com",
+  "password": "123456",
+  "nombreEmpresa": "Empresa Prueba",
+  "telefono": "7777-7777",
+  "direccion": "Barrio El Centro, San Miguel",
+  "departamento": "San Miguel",
+  "distrito": "San Miguel"
+}
+
+destinatario
+
+
+{
+  "empresaClienteId": 1,
+  "nombre": "Carlos Pérez",
+  "telefono": "7999-9999",
+  "departamento": "San Miguel",
+  "distrito": "San Miguel",
+  "direccion": "Colonia Ciudad Jardín, San Miguel",
+  "referencia": "Casa color blanco frente a una tienda"
+}
+
+Crear Piloto
+
+POST /api/pilotos
+
+{
+  "nombreUsuario": "piloto1",
+  "email": "piloto1@gmail.com",
+  "password": "123456",
+  "licencia": "LIC-12345",
+  "telefono": "7888-8888",
+  "departamento": "San Miguel",
+  "distrito": "San Miguel"
+}
+
+Crear Envío
+
+POST /api/envios
+
+{
+  "empresaClienteId": 1,
+  "destinatarioId": 1,
+  "producto": "Laptop Dell",
+  "descripcionProducto": "Laptop Dell color gris con cargador"
+}
+
+
+Asignar Piloto
+
+POST /api/envios/asignar-piloto
+
+{
+  "envioId": 1,
+  "pilotoId": 1
+}
+
+
+Cambiar Estado
+Recolectado 1
+En bodega 2
+En ruta 3
+Entregado 4
+Devolución 5
+PUT /api/envios/cambiar-estado
+
+Prueba primero con este:
+
+{
+  "envioId": 1,
+  "estado": "3"
+}
+
+Reportar Entrega
+
+POST /api/envios/reportar-entrega
+
+{
+  "envioId": 1,
+  "firmaCliente": "Carlos Pérez",
+  "imagen1": "entrega_foto_1.jpg",
+  "imagen2": "entrega_foto_2.jpg",
+  "observaciones": "Producto entregado correctamente al destinatario."
+}
+
+
+admin
+
+{
+  "nombre": "Admin San Salvador",
+  "email": "admin@sistema.com",
+  "password": "Admin123",
+  "rol": 2,
+  "departamento": "San Salvador",
+  "distrito": "San Salvador",
+  "direccionCercana": "Oficina administrativa San Salvador"
+}
+
+master
+{
+  "email": "master@sistema.com",
+  "password": "Admin123"
+}
+
+Master = 1
+Admin = 2
+Empresa = 3
+Piloto = 4
+

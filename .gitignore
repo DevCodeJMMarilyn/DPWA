@@ -17,9 +17,14 @@ packages/
 # Logs
 *.log
 
-# Archivos comprimidos
-*.rar
-*.zip
 
 # Node
 node_modules/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.tmp
+*.cache
